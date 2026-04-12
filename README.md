@@ -65,6 +65,13 @@ python main.py
 4. Gemini returns a fully optimized shopping cart.
 5. The script prints the results to your terminal and saves a beautifully formatted file (e.g., `shopping_recommendation_20231024_153022.md`) in your project folder.
 
+## 🤖 Automation Ideas (What's Next?)
+Because this is a standard Python script, you can easily wire it up to your daily life:
+- **Daily Morning Routine**: Use a cron job or macOS Automator to run this at 7:00 AM every day and email you the resulting Markdown file.
+- **Voice Activation**: Tie the script to a macOS Shortcut so you can say *"Hey Siri, find dispensary deals"* to execute it.
+- **Push Notifications**: Add a few lines of code to send the final `md_output` directly to a private Discord channel, Slack, or as an SMS via Twilio.
+- **Web Dashboard**: Wrap the script in a lightweight framework like Streamlit to create a personal website where you can adjust preferences via sliders and push a button to run it.
+
 ## 🛠️ Tech Stack
 - **`curl_cffi`**: For stealthy HTTP requests that bypass strict bot protection.
 - **`google-genai`**: For interacting with the Gemini 1.5/2.5 Flash models.

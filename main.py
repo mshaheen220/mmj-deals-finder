@@ -5,12 +5,16 @@ from datetime import datetime
 from dotenv import load_dotenv
 from curl_cffi import requests
 from pydantic import BaseModel, Field
+from flask import Flask, Response
 from google import genai
 from google.genai import types
 from google.genai.errors import ClientError, ServerError
 
 # Load environment variables
 load_dotenv()
+
+# Initialize Flask Web Server
+app = Flask(__name__)
 
 # ==========================================
 # 1. Define the Pydantic Schema
@@ -259,7 +263,7 @@ def get_shopping_recommendation(aggregated_inventory: str, user_preferences: str
 # ==========================================
 # 4. Main Execution
 # ==========================================
-def main():
+def generate_deals_report():
     # 1. Define Stores to Check
     dutchie_id = "60523818a6b5d500e0fb2e31"  # Liberty Cranberry
     trulieve_cranberry_id = "87"           # Trulieve Cranberry
@@ -350,9 +354,26 @@ def main():
                 filename = f"shopping_recommendation_{timestamp}.md"
                 with open(filename, "w", encoding="utf-8") as f:
                     f.write(md_output)
+                
+                return md_output
         except json.JSONDecodeError:
             print("\n--- AI Personal Shopper Recommendation (Raw JSON) ---")
             print(recommendation_json)
+            return recommendation_json
+            
+    return "No deals found or master inventory empty."
+
+@app.route("/", methods=["GET"])
+def health_check():
+    return "MMJ Deals Finder is awake and running!", 200
+
+@app.route("/run-deals", methods=["GET", "POST"])
+def run_deals_webhook():
+    print("Webhook triggered by Siri/Cloud!")
+    report = generate_deals_report()
+    # Return as plain text so Siri can read it cleanly
+    return Response(report, mimetype="text/plain")
 
 if __name__ == "__main__":
-    main()
+    # If running locally in the terminal, just print the report directly
+    generate_deals_report()
