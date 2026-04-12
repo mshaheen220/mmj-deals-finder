@@ -164,7 +164,7 @@ def fetch_zenleaf_data(store_id: str) -> list:
     url = "https://web-ui-production.sweedpos.com/_api/proxy/Products/GetProductList"
     
     payload = {
-        "filters": {"strainPrevalence":[4],"category":[712],"subcategory":[5524],"totalSize":[-1627035471]},
+        "filters": {"strainPrevalence":[4],"category":[712],"subcategory":[5524]},
         "page": 1,
         "pageSize": 1000,
         "sortingMethodId": 7,
@@ -335,6 +335,7 @@ def generate_deals_report():
             rec_data = json.loads(recommendation_json)
             if "error" in rec_data:
                 print(f"\n[!] Error from AI: {rec_data['error']}")
+                return f"AI Error: {rec_data['error']}"
             else:
                 md_output = f"# AI Personal Shopper Recommendation\n\n"
                 md_output += f"**Recommended Dispensary:** {rec_data.get('recommended_dispensary', 'N/A')}\n"
@@ -361,7 +362,7 @@ def generate_deals_report():
             print(recommendation_json)
             return recommendation_json
             
-    return "No deals found or master inventory empty."
+    return f"No deals found. Master inventory contained {len(master_inventory)} items."
 
 @app.route("/", methods=["GET"])
 def health_check():
