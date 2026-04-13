@@ -383,9 +383,9 @@ def run_deals_webhook():
     print("Webhook triggered by Siri/Cloud!")
     speech_text, full_report = generate_deals_report()
     
-    # Dynamically grab the server URL so the link works in the cloud
-    list_url = f"{request.host_url.rstrip('/')}/list"
-    display_text = f"{speech_text}\n\n[🔗 Tap here to view your full shopping list]({list_url})"
+    # Hardcoded Cloud Run URL for the list page
+    list_url = "https://mmj-deals-finder-9234350374.us-central1.run.app/list"
+    display_text = f"{speech_text}\n\n# [🔗 Tap here to view your full shopping list]({list_url})"
     
     # Return JSON so the iOS Shortcut can separate spoken text from displayed text
     return jsonify({"speech": speech_text, "display": display_text})
