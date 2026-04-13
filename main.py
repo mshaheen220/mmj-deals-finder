@@ -394,8 +394,13 @@ def run_deals_webhook():
 def view_latest_list():
     # Serve the full markdown file wrapped in beautiful, mobile-friendly HTML
     try:
-        with open("/tmp/latest_report.md", "r", encoding="utf-8") as f:
+        file_path = "/tmp/latest_report.md"
+        with open(file_path, "r", encoding="utf-8") as f:
             report = f.read()
+            
+        # Get the file modification time for the timestamp
+        mtime = os.path.getmtime(file_path)
+        processed_time = datetime.fromtimestamp(mtime).strftime('%b %d, %Y at %I:%M %p')
             
         html_content = f"""
         <!DOCTYPE html>
@@ -413,6 +418,10 @@ def view_latest_list():
             <main class="container" id="content">
                 <div aria-busy="true">Loading recommendations...</div>
             </main>
+            <footer class="container">
+                <hr>
+                <small style="color: var(--pico-muted-color);"><i>Report processed at: {processed_time}</i></small>
+            </footer>
             <script>
                 const markdownText = {json.dumps(report)};
                 document.getElementById('content').innerHTML = marked.parse(markdownText);
