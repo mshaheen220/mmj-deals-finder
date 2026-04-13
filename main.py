@@ -30,6 +30,7 @@ class RecommendedItem(BaseModel):
 
 class ShoppingTrip(BaseModel):
     recommended_dispensary: str = Field(description="The SINGLE dispensary chosen for this trip")
+    math_scratchpad: str = Field(description="Step-by-step math showing exactly how the total cost was calculated (e.g., '2 items * $30 = $60')")
     total_estimated_cost: float = Field(description="Total cost of the recommended items")
     overall_justification: str = Field(description="Why this dispensary and basket of goods was chosen over the alternatives")
     items_to_buy: list[RecommendedItem]
@@ -230,7 +231,9 @@ def get_shopping_recommendation(aggregated_inventory: str, user_preferences: str
         "3. Provide a clear justification for why you chose the store and the specific products.\n"
         "4. If no products match the user's strict criteria, return an empty list of items, but explain why.\n"
         "5. Do NOT list the same product multiple times. Use the 'quantity' field to indicate how many of each to buy.\n"
-        "6. IMPORTANT: Carefully review pricing and specials data. For many stores, the sale price ALREADY has the single-item percentage discount applied. Do NOT double-discount. HOWEVER, if there is a specific bulk/quantity discount (e.g., 'Buy 6+ get 50% off' or '4 for $99'), you MUST apply it and recalculate the 'unit_price' and 'total_estimated_cost' based on that volume. Note the deal in the 'applied_discount' field."
+        "6. IMPORTANT: Carefully review pricing and specials data. For many stores, the sale price ALREADY has the single-item percentage discount applied. Do NOT double-discount. HOWEVER, if there is a specific bulk/quantity discount (e.g., 'Buy 6+ get 50% off' or '4 for $99'), you MUST apply it and recalculate the 'unit_price' and 'total_estimated_cost' based on that volume. Note the deal in the 'applied_discount' field.\n"
+        "7. ARITHMETIC: You are a computer. You must accurately calculate the total cost. `total_estimated_cost` must exactly equal the sum of (`unit_price` * `quantity`) for all items. Use the `math_scratchpad` field to show your work.\n"
+        "8. HARD LIMITS: If the user sets a maximum price (e.g., under $27), you MUST NOT recommend items above that price. If nothing qualifies, return an empty list."
     )
     
     # We combine the system instruction with the user's specific prompt for this run
@@ -324,10 +327,9 @@ def generate_deals_report():
         "The THC level MUST be above 70%. "
         "I prefer strains high in Myrcene or Caryophyllene. If terpene data is missing, prioritize the highest THC % available. "
         "Pricing and Quantity Logic: I know I can find qualifying carts for $27 each on a typical day. "
-        "CRITICAL: Always calculate the final effective price per cart AFTER applying any bulk or quantity deals (like 'Buy 6+ get 50% off') FIRST, as this might drop an expensive cart below $27. "
-        "If the effective price is just average (around $27), only recommend buying a small quantity (1 or 2). "
+        "CRITICAL: Always calculate the final effective price per cart AFTER applying any bulk or quantity deals (like 'Buy 6+ get 50% off') FIRST. "
         "If the effective price drops exceptionally low (well under $27 each) because of a bulk deal, stock up and recommend the exact quantity needed to trigger that deal. "
-        "Absolutely do NOT exceed 8 carts total in the order, and keep the average price per unit under $27. "
+        "HARD RULES: Absolutely do NOT exceed 8 carts total in the order. You MUST keep the effective price per unit STRICTLY under $27. Do not recommend anything over $27/cart. "
         "Pick the single store that offers the best overall value based on this reasoning."
     )
     
@@ -343,7 +345,8 @@ def generate_deals_report():
             else:
                 md_output = f"# AI Personal Shopper Recommendation\n\n"
                 md_output += f"**Recommended Dispensary:** {rec_data.get('recommended_dispensary', 'N/A')}\n"
-                md_output += f"**Total Estimated Cost:** ${rec_data.get('total_estimated_cost', 0):.2f}\n\n"
+                md_output += f"**Total Estimated Cost:** ${rec_data.get('total_estimated_cost', 0):.2f}\n"
+                md_output += f"**Math Check:** {rec_data.get('math_scratchpad', 'N/A')}\n\n"
                 md_output += f"### Overall Justification\n{rec_data.get('overall_justification', 'N/A')}\n\n"
                 md_output += f"### Items to Buy\n"
                 for item in rec_data.get('items_to_buy', []):
