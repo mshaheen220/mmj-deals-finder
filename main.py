@@ -228,7 +228,7 @@ def get_shopping_recommendation(aggregated_inventory: str, user_preferences: str
         "RULES:\n"
         "1. Single Dispensary: Pick ONLY ONE store for the entire trip.\n"
         "2. Quantities: Consolidate identical items using the 'quantity' field.\n"
-        "3. Discounts: Single-item percentage discounts (e.g., '30% off') are ALREADY reflected in the lowest listed price. DO NOT double-discount them. HOWEVER, you MUST calculate and apply bulk/conditional deals (e.g., '4 for $99' -> 99/4 = 24.75, OR 'Buy 6+ get 50% off' -> apply 50% off to the total if quantity >= 6). Record the promo in 'applied_discount'.\n"
+        "3. Discounts: The JSON usually provides an original MSRP and a lower sale price. For single items, use the lowest price (DO NOT double-discount). HOWEVER, if a bulk percentage promo applies (e.g., 'Buy 6+ get 50% off'), apply that percentage to the ORIGINAL MSRP. For flat-rate bulk bundles (e.g., '4 for $99'), just divide (99/4=24.75). Record the promo in 'applied_discount'.\n"
         "4. Math: Use `math_scratchpad` for a very brief equation proving the total. `total_estimated_cost` MUST exactly equal sum of (discounted_unit_price * quantity).\n"
         "5. Strict Limits: Obey user's price/quantity limits absolutely. If no products qualify, return an empty list.\n"
         "6. Output: Concise. No preamble."
@@ -332,7 +332,7 @@ def generate_deals_report():
     my_preferences = (
         "Target: 1g Indica vape cartridges, >70% THC.\n"
         "Terpenes: Prioritize Myrcene/Caryophyllene. If missing, prioritize highest THC%.\n"
-        "Pricing Logic: Must beat $27/cart effective price. Calculate effective price AFTER bulk deals FIRST.\n"
+        "Pricing Logic: Must beat $27/cart effective price. Do not calculate single-item percentage discounts. For bulk percentage deals (e.g., '50% off 6+'), apply the discount to the product's original MSRP. For flat-rate bundles, divide the bundle price by quantity.\n"
         "Quantity Logic: If the deal is average (close to $27), buy 4 carts. If the deal is great (well below $27), buy up to 10 carts. You can recommend anywhere between 4 and 10 carts depending on how good the price is.\n"
         "Hard Limits: Max 10 carts. Max $26.99 effective price per unit. No total budget cap.\n"
         "Goal: Select the single store with the best overall value."
