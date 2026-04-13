@@ -229,7 +229,7 @@ def get_shopping_recommendation(aggregated_inventory: str, user_preferences: str
         "RULES:\n"
         "1. Single Dispensary: Pick ONLY ONE store for the entire trip.\n"
         "2. Quantities: Consolidate identical items using the 'quantity' field.\n"
-        "3. Pricing & Discounts: NEVER invent or hallucinate prices. The lowest price listed in the JSON is the FINAL price. DO NOT apply any percentage discounts. The ONLY math allowed is division for strict volume/bulk deals (e.g., '4 for $99' -> 99/4=24.75). Record the promo in 'applied_discount'.\n"
+        "3. Pricing & Discounts: The lowest price listed in the JSON is the FINAL price. WARNING: If a promo says '40% off', the server already applied it to the listed price. NEVER multiply or subtract percentages to lower the price further. The ONLY math allowed is division for flat-rate volume bundles (e.g., '4 for $99' -> 99/4=24.75). Record the promo in 'applied_discount'.\n"
         "4. Math: Use `math_scratchpad` for a very brief equation proving the total. `total_estimated_cost` MUST exactly equal sum of (discounted_unit_price * quantity).\n"
         "5. Strict Limits: Obey user's price/quantity limits absolutely. If no products qualify, return an empty list. Do not fake prices to force a match.\n"
         "6. Output: Concise. No preamble."
@@ -275,6 +275,27 @@ def get_shopping_recommendation(aggregated_inventory: str, user_preferences: str
 # ==========================================
 # 4. Main Execution
 # ==========================================
+def sanitize_product_data(item):
+    """Recursively removes empty values and heavy junk fields (like images/URLs) to save AI tokens."""
+    if isinstance(item, list):
+        return [sanitize_product_data(i) for i in item if i]
+    elif isinstance(item, dict):
+        cleaned = {}
+        # Blacklist of noisy keys that don't help the AI pick products
+        junk_keys = {'image', 'images', 'imageurl', 'image_url', 'picture', 'assets', 'media', 'url', 'slug', 'createdat', 'updatedat', 'reviews', 'icon'}
+        for k, v in item.items():
+            if k.lower() in junk_keys:
+                continue
+            if v in (None, "", [], {}):
+                continue
+            if isinstance(v, str) and v.startswith('http') and len(v) > 15:
+                continue
+            cleaned_v = sanitize_product_data(v)
+            if cleaned_v not in (None, "", [], {}):
+                cleaned[k] = cleaned_v
+        return cleaned
+    return item
+
 def generate_deals_report():
     # 1. Define Stores to Check
     dutchie_id = "60523818a6b5d500e0fb2e31"  # Liberty Cranberry
@@ -333,16 +354,19 @@ def generate_deals_report():
     my_preferences = (
         "Target: 1g Indica vape cartridges, >70% THC.\n"
         "Terpenes: Prioritize Myrcene/Caryophyllene. If missing, prioritize highest THC%.\n"
-        "Pricing Logic: Use the exact lowest price from the JSON. DO NOT apply percentage discounts. Only recalculate for strict volume deals (e.g., '4 for $99').\n"
+        "Pricing Logic: The lowest JSON price is final. DO NOT apply percentage discounts (like '40% off')—they are already baked into the JSON price. Only recalculate for flat-rate volume deals (e.g., '4 for $99').\n"
         "Quantity Logic: If the deal is average (close to $27), buy 4 carts. If the deal is great (well below $27), buy up to 10 carts. You can recommend anywhere between 4 and 10 carts depending on how good the price is.\n"
         "Hard Limits: Max 10 carts. The FINAL effective price (after any valid volume bundles are applied) MUST be $26.99 or less per unit. If the effective unit price remains $27.00 or higher, REJECT IT. Do not alter or fake prices to make them fit. No total budget cap.\n"
         "Goal: Select the single store with the best overall value."
     )
     
-    # 7. Get AI Recommendation
-    if master_inventory:
+    # 7. Sanitize inventory to strip images, nulls, and empty values, saving thousands of tokens
+    sanitized_inventory = sanitize_product_data(master_inventory)
+    
+    # 8. Get AI Recommendation
+    if sanitized_inventory:
         # ---  GEMINI CALL ---
-        recommendation_json = get_shopping_recommendation(json.dumps(master_inventory), my_preferences)
+        recommendation_json = get_shopping_recommendation(json.dumps(sanitized_inventory), my_preferences)
         try:
             rec_data = json.loads(recommendation_json)
             if "error" in rec_data:
