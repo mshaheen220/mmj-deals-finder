@@ -9,6 +9,7 @@ from flask import Flask, Response, request, jsonify
 from google import genai
 from google.genai import types
 from google.genai.errors import ClientError, ServerError
+from google.cloud import storage
 
 # Load environment variables
 load_dotenv()
@@ -367,9 +368,21 @@ def generate_deals_report():
                 with open(filename, "w", encoding="utf-8") as f:
                     f.write(md_output)
                 
-                # Save to the /tmp directory (which Google Cloud Run uses for in-memory file storage)
-                with open("/tmp/latest_report.md", "w", encoding="utf-8") as f:
-                    f.write(md_output)
+                # Check if a Google Cloud Storage bucket is configured
+                bucket_name = os.environ.get("GCS_BUCKET_NAME")
+                if bucket_name:
+                    try:
+                        storage_client = storage.Client()
+                        bucket = storage_client.bucket(bucket_name)
+                        blob = bucket.blob("latest_report.md")
+                        blob.upload_from_string(md_output, content_type="text/markdown")
+                        print(f"💾 Report securely saved to cloud bucket: {bucket_name}")
+                    except Exception as e:
+                        print(f"[!] Failed to save to GCS bucket: {e}")
+                else:
+                    # Fallback to ephemeral /tmp storage if no bucket is set
+                    with open("/tmp/latest_report.md", "w", encoding="utf-8") as f:
+                        f.write(md_output)
                     
                 # Create the short, conversational summary for Siri
                 dispensary = rec_data.get('recommended_dispensary', 'Unknown')
@@ -404,13 +417,25 @@ def run_deals_webhook():
 def view_latest_list():
     # Serve the full markdown file wrapped in beautiful, mobile-friendly HTML
     try:
-        file_path = "/tmp/latest_report.md"
-        with open(file_path, "r", encoding="utf-8") as f:
-            report = f.read()
-            
-        # Get the file modification time for the timestamp
-        mtime = os.path.getmtime(file_path)
-        processed_time = datetime.fromtimestamp(mtime).strftime('%b %d, %Y at %I:%M %p')
+        bucket_name = os.environ.get("GCS_BUCKET_NAME")
+        if bucket_name:
+            storage_client = storage.Client()
+            bucket = storage_client.bucket(bucket_name)
+            blob = bucket.blob("latest_report.md")
+            if not blob.exists():
+                raise FileNotFoundError
+                
+            report = blob.download_as_text()
+            blob.reload() # Fetch the latest metadata (like upload time)
+            processed_time = blob.updated.strftime('%b %d, %Y at %I:%M %p')
+        else:
+            file_path = "/tmp/latest_report.md"
+            with open(file_path, "r", encoding="utf-8") as f:
+                report = f.read()
+                
+            # Get the file modification time for the timestamp
+            mtime = os.path.getmtime(file_path)
+            processed_time = datetime.fromtimestamp(mtime).strftime('%b %d, %Y at %I:%M %p')
             
         html_content = f"""
         <!DOCTYPE html>
@@ -440,7 +465,7 @@ def view_latest_list():
         </html>
         """
         return Response(html_content, mimetype="text/html")
-    except FileNotFoundError:
+    except Exception:
         return Response("<main class='container'><h1>No report found.</h1><p>Ask Siri to find deals first!</p></main>", mimetype="text/html")
 
 if __name__ == "__main__":
