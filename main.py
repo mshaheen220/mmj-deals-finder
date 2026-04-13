@@ -226,11 +226,11 @@ def get_shopping_recommendation(aggregated_inventory: str, user_preferences: str
         "Your goal is to build the perfect shopping cart based on the user's preferences. \n\n"
         "CRITICAL RULES:\n"
         "1. You MUST pick only ONE dispensary for the entire shopping trip. The user refuses to drive to multiple stores.\n"
-        "2. Optimize for the user's stated preferences (price, terpenes, strains, etc.).\n"
+        "2. Optimize for the user's stated preferences strictly and objectively. If multiple valid shopping carts exist, use the user's defined tie-breaking rules to pick the absolute best one.\n"
         "3. Provide a clear justification for why you chose the store and the specific products.\n"
         "4. If no products match the user's strict criteria, return an empty list of items, but explain why.\n"
         "5. Do NOT list the same product multiple times. Use the 'quantity' field to indicate how many of each to buy.\n"
-        "6. IMPORTANT: Carefully review pricing and specials data. For many stores, the sale price (e.g., 'specialPrice' or 'promoPrice') ALREADY has the percentage discount applied. Do NOT apply a percentage discount a second time (no double-discounting). If a flat-rate quantity bundle (e.g., '4 for $99') applies, recalculate the 'unit_price' and 'total_estimated_cost' based on that bundle. Note the deal in the 'applied_discount' field."
+        "6. IMPORTANT: Carefully review pricing and specials data. For many stores, the sale price ALREADY has the single-item percentage discount applied. Do NOT double-discount. HOWEVER, if there is a specific bulk/quantity discount (e.g., 'Buy 6+ get 50% off' or '4 for $99'), you MUST apply it and recalculate the 'unit_price' and 'total_estimated_cost' based on that volume. Note the deal in the 'applied_discount' field."
     )
     
     # We combine the system instruction with the user's specific prompt for this run
@@ -247,7 +247,7 @@ def get_shopping_recommendation(aggregated_inventory: str, user_preferences: str
                 system_instruction=system_instruction,
                 response_mime_type="application/json",
                 response_schema=ShoppingTrip,
-                temperature=0.2, # Slightly higher temperature allows for better reasoning/justification generation
+                temperature=0.1, # Set to 0.1 to allow slight reasoning flexibility for quantity logic
             )
         )
         return response.text
@@ -321,11 +321,14 @@ def generate_deals_report():
     # 6. Define your Personal Preferences!
     my_preferences = (
         "I am looking for 1g Indica vape cartridges. "
-        "i like to buy a couple of each strain and no more than 8 total in an order. "
-        "a typical 1g indica cart should cost under $30. "
-        "the thc level should be high (above 70%). "
-        "I prefer strains high in Myrcene or Caryophyllene if that data is available, otherwise just look for classic heavy Indicas. "
-        "Which single store offers the best basket for my money today?"
+        "The THC level MUST be above 70%. "
+        "I prefer strains high in Myrcene or Caryophyllene. If terpene data is missing, prioritize the highest THC % available. "
+        "Pricing and Quantity Logic: I know I can find qualifying carts for $27 each on a typical day. "
+        "CRITICAL: Always calculate the final effective price per cart AFTER applying any bulk or quantity deals (like 'Buy 6+ get 50% off') FIRST, as this might drop an expensive cart below $27. "
+        "If the effective price is just average (around $27), only recommend buying a small quantity (1 or 2). "
+        "If the effective price drops exceptionally low (well under $27 each) because of a bulk deal, stock up and recommend the exact quantity needed to trigger that deal. "
+        "Absolutely do NOT exceed 8 carts total in the order, and keep the average price per unit under $27. "
+        "Pick the single store that offers the best overall value based on this reasoning."
     )
     
     # 7. Get AI Recommendation
@@ -388,7 +391,7 @@ def run_deals_webhook():
     display_text = f"{speech_text}\n\n# [🔗 Tap here to view your full shopping list]({list_url})"
     
     # Return JSON so the iOS Shortcut can separate spoken text from displayed text
-    return jsonify({"speech": speech_text, "display": display_text})
+    return jsonify({"speech": speech_text, "display": display_text, "url": list_url})
 
 @app.route("/list", methods=["GET"])
 def view_latest_list():
