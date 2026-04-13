@@ -30,7 +30,7 @@ class RecommendedItem(BaseModel):
 
 class ShoppingTrip(BaseModel):
     recommended_dispensary: str = Field(description="The SINGLE dispensary chosen for this trip")
-    math_scratchpad: str = Field(description="Step-by-step math showing exactly how the total cost was calculated (e.g., '2 items * $30 = $60')")
+    math_scratchpad: str = Field(description="Brief math equation proving the total cost (e.g., '4 * 25 = 100'). Keep it extremely short.")
     total_estimated_cost: float = Field(description="Total cost of the recommended items")
     overall_justification: str = Field(description="Why this dispensary and basket of goods was chosen over the alternatives")
     items_to_buy: list[RecommendedItem]
@@ -228,7 +228,7 @@ def get_shopping_recommendation(aggregated_inventory: str, user_preferences: str
         "1. Single Dispensary: Pick ONLY ONE store for the entire trip.\n"
         "2. Quantities: Consolidate identical items using the 'quantity' field.\n"
         "3. Discounts: Single-item sale prices are already discounted. DO NOT double-discount. DO apply bulk/bundle deals (e.g., '4 for $99'). Calculate effective unit price (e.g., 99/4=24.75). Record deal in 'applied_discount'.\n"
-        "4. Math: Use `math_scratchpad` for step-by-step arithmetic. `total_estimated_cost` MUST exactly equal sum of (discounted_unit_price * quantity).\n"
+        "4. Math: Use `math_scratchpad` for a very brief equation proving the total. `total_estimated_cost` MUST exactly equal sum of (discounted_unit_price * quantity).\n"
         "5. Strict Limits: Obey user's price/quantity limits absolutely. If no products qualify, return an empty list.\n"
         "6. Output: Concise. No preamble."
     )
@@ -332,8 +332,8 @@ def generate_deals_report():
         "Target: 1g Indica vape cartridges, >70% THC.\n"
         "Terpenes: Prioritize Myrcene/Caryophyllene. If missing, prioritize highest THC%.\n"
         "Pricing Logic: Must beat $27/cart effective price. Calculate effective price AFTER bulk deals FIRST.\n"
-        "Quantity: Max 8 carts total. If bulk deals drop price significantly below $27, maximize quantity up to 8 to trigger deal.\n"
-        "Hard Limits: Max 8 carts. Max $26.99 effective price per unit. No total budget cap.\n"
+        "Quantity Logic: If the deal is average (close to $27), buy 4 carts. If the deal is great (well below $27), buy up to 10 carts. You can recommend anywhere between 4 and 10 carts depending on how good the price is.\n"
+        "Hard Limits: Max 10 carts. Max $26.99 effective price per unit. No total budget cap.\n"
         "Goal: Select the single store with the best overall value."
     )
     
