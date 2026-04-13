@@ -2,6 +2,7 @@ import json
 import os
 import urllib.parse
 from datetime import datetime
+from zoneinfo import ZoneInfo
 from dotenv import load_dotenv
 from curl_cffi import requests
 from pydantic import BaseModel, Field
@@ -228,7 +229,7 @@ def get_shopping_recommendation(aggregated_inventory: str, user_preferences: str
         "RULES:\n"
         "1. Single Dispensary: Pick ONLY ONE store for the entire trip.\n"
         "2. Quantities: Consolidate identical items using the 'quantity' field.\n"
-        "3. Discounts: The JSON usually provides an original MSRP and a lower sale price. For single items, use the lowest price (DO NOT double-discount). HOWEVER, if a bulk percentage promo applies (e.g., 'Buy 6+ get 50% off'), apply that percentage to the ORIGINAL MSRP. For flat-rate bulk bundles (e.g., '4 for $99'), just divide (99/4=24.75). Record the promo in 'applied_discount'.\n"
+        "3. Pricing & Discounts: Use the lowest listed JSON price as the final price. General percentage discounts (e.g., '30% off') are ALREADY applied in the JSON. DO NOT calculate or apply them again. ONLY calculate a new price if there is a VOLUME/BULK requirement (e.g., 'Buy 4 for $99' -> 99/4=24.75, or 'Buy 6+ get 50% off' -> apply to MSRP). Record the promo in 'applied_discount'.\n"
         "4. Math: Use `math_scratchpad` for a very brief equation proving the total. `total_estimated_cost` MUST exactly equal sum of (discounted_unit_price * quantity).\n"
         "5. Strict Limits: Obey user's price/quantity limits absolutely. If no products qualify, return an empty list.\n"
         "6. Output: Concise. No preamble."
@@ -332,7 +333,7 @@ def generate_deals_report():
     my_preferences = (
         "Target: 1g Indica vape cartridges, >70% THC.\n"
         "Terpenes: Prioritize Myrcene/Caryophyllene. If missing, prioritize highest THC%.\n"
-        "Pricing Logic: Must beat $27/cart effective price. Do not calculate single-item percentage discounts. For bulk percentage deals (e.g., '50% off 6+'), apply the discount to the product's original MSRP. For flat-rate bundles, divide the bundle price by quantity.\n"
+        "Pricing Logic: Must beat $27/cart effective price. The lowest listed JSON price is the final price. DO NOT apply general percentage discounts yourself. ONLY calculate new prices for strict volume/bulk deals (e.g., 'Buy 4 for $99' or 'Buy 6+ get 50% off').\n"
         "Quantity Logic: If the deal is average (close to $27), buy 4 carts. If the deal is great (well below $27), buy up to 10 carts. You can recommend anywhere between 4 and 10 carts depending on how good the price is.\n"
         "Hard Limits: Max 10 carts. Max $26.99 effective price per unit. No total budget cap.\n"
         "Goal: Select the single store with the best overall value."
@@ -363,7 +364,7 @@ def generate_deals_report():
                 print("\n" + "="*60 + "\n")
                 print(md_output)
                 print("="*60 + "\n")
-                timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+                timestamp = datetime.now(ZoneInfo("America/New_York")).strftime("%Y%m%d_%H%M%S")
                 filename = f"/tmp/shopping_recommendation_{timestamp}.md"
                 with open(filename, "w", encoding="utf-8") as f:
                     f.write(md_output)
@@ -427,7 +428,7 @@ def view_latest_list():
                 
             report = blob.download_as_text()
             blob.reload() # Fetch the latest metadata (like upload time)
-            processed_time = blob.updated.strftime('%b %d, %Y at %I:%M %p')
+            processed_time = blob.updated.astimezone(ZoneInfo("America/New_York")).strftime('%b %d, %Y at %I:%M %p')
         else:
             file_path = "/tmp/latest_report.md"
             with open(file_path, "r", encoding="utf-8") as f:
@@ -435,7 +436,7 @@ def view_latest_list():
                 
             # Get the file modification time for the timestamp
             mtime = os.path.getmtime(file_path)
-            processed_time = datetime.fromtimestamp(mtime).strftime('%b %d, %Y at %I:%M %p')
+            processed_time = datetime.fromtimestamp(mtime, tz=ZoneInfo("America/New_York")).strftime('%b %d, %Y at %I:%M %p')
             
         html_content = f"""
         <!DOCTYPE html>
