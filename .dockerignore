@@ -1,0 +1,9 @@
+venv/
+.env
+__pycache__/
+.DS_Store
+.git/
+shopping_recommendation*.md
+latest_report.md
+debug_inventory.json
+zenleaf_raw.json

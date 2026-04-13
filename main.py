@@ -353,12 +353,12 @@ def generate_deals_report():
                 print(md_output)
                 print("="*60 + "\n")
                 timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-                filename = f"shopping_recommendation_{timestamp}.md"
+                filename = f"/tmp/shopping_recommendation_{timestamp}.md"
                 with open(filename, "w", encoding="utf-8") as f:
                     f.write(md_output)
                 
-                # Also save to a static file so the web server can serve it to your phone
-                with open("latest_report.md", "w", encoding="utf-8") as f:
+                # Save to the /tmp directory (which Google Cloud Run uses for in-memory file storage)
+                with open("/tmp/latest_report.md", "w", encoding="utf-8") as f:
                     f.write(md_output)
                     
                 # Create the short, conversational summary for Siri
@@ -387,13 +387,37 @@ def run_deals_webhook():
 
 @app.route("/list", methods=["GET"])
 def view_latest_list():
-    # Serve the full markdown file so you can read it on your phone
+    # Serve the full markdown file wrapped in beautiful, mobile-friendly HTML
     try:
-        with open("latest_report.md", "r", encoding="utf-8") as f:
+        with open("/tmp/latest_report.md", "r", encoding="utf-8") as f:
             report = f.read()
-        return Response(report, mimetype="text/plain")
+            
+        html_content = f"""
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>MMJ Personal Shopper</title>
+            <!-- Pico.css for beautiful, dark-mode ready styling -->
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+            <!-- Marked.js to convert Markdown to HTML -->
+            <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+        </head>
+        <body>
+            <main class="container" id="content">
+                <div aria-busy="true">Loading recommendations...</div>
+            </main>
+            <script>
+                const markdownText = {json.dumps(report)};
+                document.getElementById('content').innerHTML = marked.parse(markdownText);
+            </script>
+        </body>
+        </html>
+        """
+        return Response(html_content, mimetype="text/html")
     except FileNotFoundError:
-        return Response("No report has been generated yet. Ask Siri to find deals first!", mimetype="text/plain")
+        return Response("<main class='container'><h1>No report found.</h1><p>Ask Siri to find deals first!</p></main>", mimetype="text/html")
 
 if __name__ == "__main__":
     # If running locally in the terminal, just print the report directly
