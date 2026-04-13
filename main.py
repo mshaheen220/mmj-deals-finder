@@ -5,7 +5,7 @@ from datetime import datetime
 from dotenv import load_dotenv
 from curl_cffi import requests
 from pydantic import BaseModel, Field
-from flask import Flask, Response
+from flask import Flask, Response, request, jsonify
 from google import genai
 from google.genai import types
 from google.genai.errors import ClientError, ServerError
@@ -382,8 +382,13 @@ def health_check():
 def run_deals_webhook():
     print("Webhook triggered by Siri/Cloud!")
     speech_text, full_report = generate_deals_report()
-    # Return ONLY the short text so Siri reads just the summary
-    return Response(speech_text, mimetype="text/plain")
+    
+    # Dynamically grab the server URL so the link works in the cloud
+    list_url = f"{request.host_url.rstrip('/')}/list"
+    display_text = f"{speech_text}\n\n🔗 Tap here to view your full shopping list:\n{list_url}"
+    
+    # Return JSON so the iOS Shortcut can separate spoken text from displayed text
+    return jsonify({"speech": speech_text, "display": display_text})
 
 @app.route("/list", methods=["GET"])
 def view_latest_list():
