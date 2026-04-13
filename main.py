@@ -231,9 +231,9 @@ def get_shopping_recommendation(aggregated_inventory: str, user_preferences: str
         "3. Provide a clear justification for why you chose the store and the specific products.\n"
         "4. If no products match the user's strict criteria, return an empty list of items, but explain why.\n"
         "5. Do NOT list the same product multiple times. Use the 'quantity' field to indicate how many of each to buy.\n"
-        "6. IMPORTANT: Carefully review pricing and specials data. For many stores, the sale price ALREADY has the single-item percentage discount applied. Do NOT double-discount. HOWEVER, if there is a specific bulk/quantity discount (e.g., 'Buy 6+ get 50% off' or '4 for $99'), you MUST apply it and recalculate the 'unit_price' and 'total_estimated_cost' based on that volume. Note the deal in the 'applied_discount' field.\n"
-        "7. ARITHMETIC: You are a computer. You must accurately calculate the total cost. `total_estimated_cost` must exactly equal the sum of (`unit_price` * `quantity`) for all items. Use the `math_scratchpad` field to show your work.\n"
-        "8. HARD LIMITS: If the user sets a maximum price (e.g., under $27), you MUST NOT recommend items above that price. If nothing qualifies, return an empty list."
+        "6. IMPORTANT: Carefully review pricing and specials data. For many stores, the sale price ALREADY has the single-item percentage discount applied. Do NOT double-discount. HOWEVER, if there is a specific bulk/quantity discount (e.g., 'Buy 6+ get 50% off' or '4 for $99'), you MUST apply it. To find the 'unit_price', divide the bundle price by the bundle quantity (e.g., $99 / 4 = $24.75). Note the deal in the 'applied_discount' field.\n"
+        "7. ARITHMETIC: You are a computer. You must accurately calculate unit prices and the total cost. In `math_scratchpad`, write out the division for bulk deals, and verify that `total_estimated_cost` exactly equals the sum of (`unit_price` * `quantity`) for all items. Double-check your math!\n"
+        "8. HARD LIMITS: You MUST strictly obey all maximum price, total budget, and maximum quantity limits set by the user. If nothing qualifies, return an empty list."
     )
     
     # We combine the system instruction with the user's specific prompt for this run
@@ -326,10 +326,10 @@ def generate_deals_report():
         "I am looking for 1g Indica vape cartridges. "
         "The THC level MUST be above 70%. "
         "I prefer strains high in Myrcene or Caryophyllene. If terpene data is missing, prioritize the highest THC % available. "
-        "Pricing and Quantity Logic: I know I can find qualifying carts for $27 each on a typical day. "
+        "Pricing and Quantity Logic: I know I can find qualifying carts for $27 each on a typical day, so any recommendation MUST be a better deal than $27 per cart. "
         "CRITICAL: Always calculate the final effective price per cart AFTER applying any bulk or quantity deals (like 'Buy 6+ get 50% off') FIRST. "
-        "If the effective price drops exceptionally low (well under $27 each) because of a bulk deal, stock up and recommend the exact quantity needed to trigger that deal. "
-        "HARD RULES: Absolutely do NOT exceed 8 carts total in the order. You MUST keep the effective price per unit STRICTLY under $27. Do not recommend anything over $27/cart. "
+        "If the effective price drops exceptionally low because of a bulk deal, stock up and recommend the exact quantity needed to trigger that deal. "
+        "HARD RULES: Absolutely do NOT exceed 8 carts total in the order. You MUST keep the effective price per unit STRICTLY under $27. There is no total budget limit as long as the per-unit price is a great deal. "
         "Pick the single store that offers the best overall value based on this reasoning."
     )
     
