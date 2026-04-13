@@ -227,7 +227,7 @@ def get_shopping_recommendation(aggregated_inventory: str, user_preferences: str
         "RULES:\n"
         "1. Single Dispensary: Pick ONLY ONE store for the entire trip.\n"
         "2. Quantities: Consolidate identical items using the 'quantity' field.\n"
-        "3. Discounts: Single-item sale prices are already discounted. DO NOT double-discount. DO apply bulk/bundle deals (e.g., '4 for $99'). Calculate effective unit price (e.g., 99/4=24.75). Record deal in 'applied_discount'.\n"
+        "3. Discounts: Single-item percentage discounts (e.g., '30% off') are ALREADY reflected in the lowest listed price. DO NOT double-discount them. HOWEVER, you MUST calculate and apply bulk/conditional deals (e.g., '4 for $99' -> 99/4 = 24.75, OR 'Buy 6+ get 50% off' -> apply 50% off to the total if quantity >= 6). Record the promo in 'applied_discount'.\n"
         "4. Math: Use `math_scratchpad` for a very brief equation proving the total. `total_estimated_cost` MUST exactly equal sum of (discounted_unit_price * quantity).\n"
         "5. Strict Limits: Obey user's price/quantity limits absolutely. If no products qualify, return an empty list.\n"
         "6. Output: Concise. No preamble."
