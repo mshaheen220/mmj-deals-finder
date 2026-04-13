@@ -222,18 +222,15 @@ def get_shopping_recommendation(aggregated_inventory: str, user_preferences: str
     
     # The System Prompt directs the model's behavior
     system_instruction = (
-        "You are an expert cannabis personal shopper and sommelier. "
-        "You will be provided with a JSON list of available products from MULTIPLE dispensaries. "
-        "Your goal is to build the perfect shopping cart based on the user's preferences. \n\n"
-        "CRITICAL RULES:\n"
-        "1. You MUST pick only ONE dispensary for the entire shopping trip. The user refuses to drive to multiple stores.\n"
-        "2. Optimize for the user's stated preferences strictly and objectively. If multiple valid shopping carts exist, use the user's defined tie-breaking rules to pick the absolute best one.\n"
-        "3. Provide a clear justification for why you chose the store and the specific products.\n"
-        "4. If no products match the user's strict criteria, return an empty list of items, but explain why.\n"
-        "5. Do NOT list the same product multiple times. Use the 'quantity' field to indicate how many of each to buy.\n"
-        "6. IMPORTANT: Carefully review pricing and specials data. For many stores, the sale price ALREADY has the single-item percentage discount applied. Do NOT double-discount. HOWEVER, if there is a specific bulk/quantity discount (e.g., 'Buy 6+ get 50% off' or '4 for $99'), you MUST apply it. To find the 'unit_price', divide the bundle price by the bundle quantity (e.g., $99 / 4 = $24.75). Note the deal in the 'applied_discount' field.\n"
-        "7. ARITHMETIC: You are a computer. You must accurately calculate unit prices and the total cost. In `math_scratchpad`, write out the division for bulk deals, and verify that `total_estimated_cost` exactly equals the sum of (`unit_price` * `quantity`) for all items. Double-check your math!\n"
-        "8. HARD LIMITS: You MUST strictly obey all maximum price, total budget, and maximum quantity limits set by the user. If nothing qualifies, return an empty list."
+        "Role: Expert cannabis personal shopper.\n"
+        "Task: Build an optimal shopping cart from the provided JSON inventory across multiple dispensaries based on user preferences.\n"
+        "RULES:\n"
+        "1. Single Dispensary: Pick ONLY ONE store for the entire trip.\n"
+        "2. Quantities: Consolidate identical items using the 'quantity' field.\n"
+        "3. Discounts: Single-item sale prices are already discounted. DO NOT double-discount. DO apply bulk/bundle deals (e.g., '4 for $99'). Calculate effective unit price (e.g., 99/4=24.75). Record deal in 'applied_discount'.\n"
+        "4. Math: Use `math_scratchpad` for step-by-step arithmetic. `total_estimated_cost` MUST exactly equal sum of (discounted_unit_price * quantity).\n"
+        "5. Strict Limits: Obey user's price/quantity limits absolutely. If no products qualify, return an empty list.\n"
+        "6. Output: Concise. No preamble."
     )
     
     # We combine the system instruction with the user's specific prompt for this run
@@ -242,6 +239,15 @@ def get_shopping_recommendation(aggregated_inventory: str, user_preferences: str
         f"AVAILABLE INVENTORY:\n{aggregated_inventory}"
     )
     
+    try:
+        token_info = client.models.count_tokens(
+            model='gemini-2.5-flash-lite',
+            contents=full_prompt,
+        )
+        print(f"    [i] Estimated Prompt Tokens: {token_info.total_tokens}")
+    except Exception as e:
+        pass
+
     try:
         response = client.models.generate_content(
             model='gemini-2.5-flash-lite',
@@ -323,14 +329,12 @@ def generate_deals_report():
     
     # 6. Define your Personal Preferences!
     my_preferences = (
-        "I am looking for 1g Indica vape cartridges. "
-        "The THC level MUST be above 70%. "
-        "I prefer strains high in Myrcene or Caryophyllene. If terpene data is missing, prioritize the highest THC % available. "
-        "Pricing and Quantity Logic: I know I can find qualifying carts for $27 each on a typical day, so any recommendation MUST be a better deal than $27 per cart. "
-        "CRITICAL: Always calculate the final effective price per cart AFTER applying any bulk or quantity deals (like 'Buy 6+ get 50% off') FIRST. "
-        "If the effective price drops exceptionally low because of a bulk deal, stock up and recommend the exact quantity needed to trigger that deal. "
-        "HARD RULES: Absolutely do NOT exceed 8 carts total in the order. You MUST keep the effective price per unit STRICTLY under $27. There is no total budget limit as long as the per-unit price is a great deal. "
-        "Pick the single store that offers the best overall value based on this reasoning."
+        "Target: 1g Indica vape cartridges, >70% THC.\n"
+        "Terpenes: Prioritize Myrcene/Caryophyllene. If missing, prioritize highest THC%.\n"
+        "Pricing Logic: Must beat $27/cart effective price. Calculate effective price AFTER bulk deals FIRST.\n"
+        "Quantity: Max 8 carts total. If bulk deals drop price significantly below $27, maximize quantity up to 8 to trigger deal.\n"
+        "Hard Limits: Max 8 carts. Max $26.99 effective price per unit. No total budget cap.\n"
+        "Goal: Select the single store with the best overall value."
     )
     
     # 7. Get AI Recommendation
