@@ -229,9 +229,9 @@ def get_shopping_recommendation(aggregated_inventory: str, user_preferences: str
         "RULES:\n"
         "1. Single Dispensary: Pick ONLY ONE store for the entire trip.\n"
         "2. Quantities: Consolidate identical items using the 'quantity' field.\n"
-        "3. Pricing & Discounts: Use the lowest listed JSON price as the final price. General percentage discounts (e.g., '30% off') are ALREADY applied in the JSON. DO NOT calculate or apply them again. ONLY calculate a new price if there is a VOLUME/BULK requirement (e.g., 'Buy 4 for $99' -> 99/4=24.75, or 'Buy 6+ get 50% off' -> apply to MSRP). Record the promo in 'applied_discount'.\n"
+        "3. Pricing & Discounts: NEVER invent or hallucinate prices. The lowest price listed in the JSON is the FINAL price. DO NOT apply any percentage discounts. The ONLY math allowed is division for strict volume/bulk deals (e.g., '4 for $99' -> 99/4=24.75). Record the promo in 'applied_discount'.\n"
         "4. Math: Use `math_scratchpad` for a very brief equation proving the total. `total_estimated_cost` MUST exactly equal sum of (discounted_unit_price * quantity).\n"
-        "5. Strict Limits: Obey user's price/quantity limits absolutely. If no products qualify, return an empty list.\n"
+        "5. Strict Limits: Obey user's price/quantity limits absolutely. If no products qualify, return an empty list. Do not fake prices to force a match.\n"
         "6. Output: Concise. No preamble."
     )
     
@@ -333,9 +333,9 @@ def generate_deals_report():
     my_preferences = (
         "Target: 1g Indica vape cartridges, >70% THC.\n"
         "Terpenes: Prioritize Myrcene/Caryophyllene. If missing, prioritize highest THC%.\n"
-        "Pricing Logic: Must beat $27/cart effective price. The lowest listed JSON price is the final price. DO NOT apply general percentage discounts yourself. ONLY calculate new prices for strict volume/bulk deals (e.g., 'Buy 4 for $99' or 'Buy 6+ get 50% off').\n"
+        "Pricing Logic: Use the exact lowest price from the JSON. DO NOT apply percentage discounts. Only recalculate for strict volume deals (e.g., '4 for $99').\n"
         "Quantity Logic: If the deal is average (close to $27), buy 4 carts. If the deal is great (well below $27), buy up to 10 carts. You can recommend anywhere between 4 and 10 carts depending on how good the price is.\n"
-        "Hard Limits: Max 10 carts. Max $26.99 effective price per unit. No total budget cap.\n"
+        "Hard Limits: Max 10 carts. The FINAL effective price (after any valid volume bundles are applied) MUST be $26.99 or less per unit. If the effective unit price remains $27.00 or higher, REJECT IT. Do not alter or fake prices to make them fit. No total budget cap.\n"
         "Goal: Select the single store with the best overall value."
     )
     
