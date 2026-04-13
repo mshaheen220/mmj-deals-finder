@@ -252,13 +252,14 @@ def get_shopping_recommendation(aggregated_inventory: str, user_preferences: str
         )
         return response.text
     except ClientError as e:
-        print(f"\n[!] Gemini API Client Error: {e.message}")
-        print("Tip: If the error is 'limit: 0', you may need to add a billing account to your Google AI Studio project or check your region.")
-        return '{"error": "Failed to generate recommendation due to client error."}'
+        # Clean the message so it doesn't break our JSON parsing
+        error_msg = str(e.message).replace('"', "'").replace('\n', ' ')
+        print(f"\n[!] Gemini API Client Error: {error_msg}")
+        return f'{{"error": "Client Error: {error_msg}"}}'
     except ServerError as e:
-        print(f"\n[!] Gemini API Server Error: {e.message}")
-        print("Tip: The model is currently overloaded. Please wait a few minutes and try again, or switch the model to 'gemini-1.5-flash'.")
-        return '{"error": "Model overloaded, please try again later."}'
+        error_msg = str(e.message).replace('"', "'").replace('\n', ' ')
+        print(f"\n[!] Gemini API Server Error: {error_msg}")
+        return f'{{"error": "Server Error: {error_msg}"}}'
 
 # ==========================================
 # 4. Main Execution
@@ -335,7 +336,7 @@ def generate_deals_report():
             rec_data = json.loads(recommendation_json)
             if "error" in rec_data:
                 print(f"\n[!] Error from AI: {rec_data['error']}")
-                return f"AI Error: {rec_data['error']}"
+                return f"AI Error: {rec_data['error']}", f"Error: {rec_data['error']}"
             else:
                 md_output = f"# AI Personal Shopper Recommendation\n\n"
                 md_output += f"**Recommended Dispensary:** {rec_data.get('recommended_dispensary', 'N/A')}\n"
@@ -356,13 +357,22 @@ def generate_deals_report():
                 with open(filename, "w", encoding="utf-8") as f:
                     f.write(md_output)
                 
-                return md_output
+                # Also save to a static file so the web server can serve it to your phone
+                with open("latest_report.md", "w", encoding="utf-8") as f:
+                    f.write(md_output)
+                    
+                # Create the short, conversational summary for Siri
+                dispensary = rec_data.get('recommended_dispensary', 'Unknown')
+                cost = rec_data.get('total_estimated_cost', 0)
+                speech_text = f"I recommend going to {dispensary}. The total estimated cost for your cart is ${cost:.2f}."
+                
+                return speech_text, md_output
         except json.JSONDecodeError:
             print("\n--- AI Personal Shopper Recommendation (Raw JSON) ---")
             print(recommendation_json)
-            return recommendation_json
+            return "I encountered an error parsing the AI data.", recommendation_json
             
-    return f"No deals found. Master inventory contained {len(master_inventory)} items."
+    return f"No deals found. Master inventory contained {len(master_inventory)} items.", "No deals found."
 
 @app.route("/", methods=["GET"])
 def health_check():
@@ -371,10 +381,21 @@ def health_check():
 @app.route("/run-deals", methods=["GET", "POST"])
 def run_deals_webhook():
     print("Webhook triggered by Siri/Cloud!")
-    report = generate_deals_report()
-    # Return as plain text so Siri can read it cleanly
-    return Response(report, mimetype="text/plain")
+    speech_text, full_report = generate_deals_report()
+    # Return ONLY the short text so Siri reads just the summary
+    return Response(speech_text, mimetype="text/plain")
+
+@app.route("/list", methods=["GET"])
+def view_latest_list():
+    # Serve the full markdown file so you can read it on your phone
+    try:
+        with open("latest_report.md", "r", encoding="utf-8") as f:
+            report = f.read()
+        return Response(report, mimetype="text/plain")
+    except FileNotFoundError:
+        return Response("No report has been generated yet. Ask Siri to find deals first!", mimetype="text/plain")
 
 if __name__ == "__main__":
     # If running locally in the terminal, just print the report directly
-    generate_deals_report()
+    speech, report = generate_deals_report()
+    print(f"\n[SIRI WOULD SAY]: {speech}")
