@@ -93,14 +93,7 @@ def fetch_trulieve_data(store_id: str) -> list:
                     elif isinstance(data["data"], dict) and "products" in data["data"]:
                         products = data["data"]["products"]
             
-            if page == 1 and products:
-                with open("trulieve_raw_product.json", "w", encoding="utf-8") as f:
-                    json.dump(products[0], f, indent=2)
-                print("    [DEBUG] Saved a sample raw Trulieve product to 'trulieve_raw_product.json'")
-
             if not products:
-                if page == 1:
-                    print(f"    [DEBUG] Raw Trulieve response: {json.dumps(data)[:500]}")
                 break
                 
             all_products.extend(products)
@@ -153,11 +146,6 @@ def fetch_zenleaf_data(store_id: str) -> list:
             elif "products" in data:
                 products = data["products"]
                 
-            if products:
-                with open("zenleaf_raw_product.json", "w", encoding="utf-8") as f:
-                    json.dump(products[0], f, indent=2)
-                print("    [DEBUG] Saved a sample raw Zen Leaf product to 'zenleaf_raw_product.json'")
-
             root_promos = {p.get("id"): p for p in data.get("promos", [])}
             if root_promos:
                 for p in products:

@@ -5,8 +5,3 @@ __pycache__/
 .git/
 shopping_recommendation*.md
 latest_report.md
-debug_inventory.json
-zenleaf_raw.json
-normalized_inventory.json
-trulieve_raw_product.json
-zenleaf_raw_product.json

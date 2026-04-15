@@ -3,6 +3,3 @@ venv/
 __pycache__/
 .DS_Store
 shopping_recommendation*.md
-normalized_inventory.json
-trulieve_raw_product.json
-zenleaf_raw_product.json
