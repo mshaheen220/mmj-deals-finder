@@ -110,6 +110,17 @@ def generate_deals_report():
         with open("/tmp/latest_report.md", "w", encoding="utf-8") as f:
             f.write(md_output)
             
+        # Save to Google Cloud Storage if configured
+        bucket_name = os.environ.get("GCS_BUCKET_NAME")
+        if bucket_name:
+            try:
+                storage_client = storage.Client()
+                bucket = storage_client.bucket(bucket_name)
+                blob = bucket.blob("latest_report.md")
+                blob.upload_from_string(md_output, content_type="text/markdown")
+            except Exception as e:
+                print(f"[!] Failed to save to GCS bucket: {e}")
+
         # Also dump a copy to the local project folder for easy reading during development
         try:
             with open("latest_report.md", "w", encoding="utf-8") as f:
