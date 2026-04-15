@@ -1,5 +1,4 @@
 curl_cffi
-google-genai
 pydantic
 python-dotenv
 flask

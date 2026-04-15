@@ -1,15 +1,15 @@
-# 🌿 MMJ Deals Finder & AI Personal Shopper
+# 🌿 MMJ Deals Finder & Personal Shopper
 
-An intelligent Python agent that aggregates medical marijuana dispensary menus and uses Google Gemini to act as your personal cannabis shopper. Instead of using slow headless browsers, this script directly reverse-engineers and fetches data from dispensary APIs (Dutchie, Trulieve, Sweed POS) to gather real-time inventory, pricing, and promotional data.
+An intelligent Python rule engine that aggregates medical marijuana dispensary menus and acts as your personal cannabis shopper. Instead of using slow headless browsers, this script directly reverse-engineers and fetches data from dispensary APIs (Dutchie, Trulieve, Sweed POS) to gather real-time inventory, pricing, and promotional data.
 
-It is built as a **Flask web server** containerized with **Docker** and deployed on **Google Cloud Run**. It then feeds the aggregated inventory into Google Gemini, which acts as a "sommelier" to build the perfect shopping cart based on your specific budget, terpene preferences, and desired strains. This architecture allows you to trigger the AI personal shopper from anywhere using an **iOS Siri Shortcut**!
+It is built as a **Flask web server** containerized with **Docker** and deployed on **Google Cloud Run**. It feeds the aggregated inventory into a custom, deterministic Python Combinatorial Engine, which builds the perfect shopping cart based on your specific budget, terpene preferences, and desired strains. This architecture allows you to trigger the personal shopper from anywhere using an **iOS Siri Shortcut**!
 
 ## ✨ Features
 
 - **Lightning Fast API Scraping**: Bypasses Cloudflare and Datadome WAFs using `curl_cffi` to spoof Chrome TLS fingerprints.
 - **Multi-Platform Support**: Natively extracts data from Dutchie GraphQL, Trulieve REST API, and Zen Leaf (Sweed POS) GraphQL.
-- **AI-Powered Recommendations**: Uses Google Gemini to analyze hundreds of products and output a structured Pydantic schema of the best deals.
-- **Smart Discount Calculation**: The AI reads raw promotional text (e.g., "4 for $99") and automatically factors quantity discounts into your total cost.
+- **Python Combinatorial Engine**: Evaluates thousands of cart combinations locally to strictly enforce budget and mathematically prove the best deals.
+- **Smart Promo Parsing**: Uses Regex to read raw promotional text (e.g., "4 for $99") and automatically factor quantity discounts into your total cost.
 - **Siri & iOS Shortcut Integration**: Returns short, conversational audio summaries for Siri, along with a clickable link to view your full cart.
 - **Cloud Storage**: Automatically generates a timestamped, highly readable Markdown file wrapped in beautiful HTML, backed by Google Cloud Storage.
 
@@ -29,8 +29,7 @@ This project is designed to be deployed as a serverless container on Google Clou
 2. **Deploy to Cloud Run** directly from your terminal:
    ```bash
    gcloud run deploy mmj-deals-finder --source . \
-     --region us-central1 --allow-unauthenticated \
-     --set-env-vars GEMINI_API_KEY="your_actual_api_key_here"
+     --region us-central1 --allow-unauthenticated
    ```
 
 3. **Optional (Cloud Storage):** If you want to permanently save your shopping lists, create a Google Cloud Storage bucket and add `--set-env-vars GCS_BUCKET_NAME="your_bucket_name"` to your deployment command.
@@ -56,10 +55,9 @@ Navigate to `https://your-cloud-run-url.a.run.app/list` in your browser to view 
 
 ## 🛠️ Tech Stack
 - **`curl_cffi`**: For stealthy HTTP requests that bypass strict bot protection.
-- **`google-genai`**: For interacting with the Gemini 1.5/2.5 Flash models.
 - **`Flask` & `Gunicorn`**: For the lightweight web server and production WSGI handling.
 - **`Docker`**: Containerization for seamless Google Cloud deployment.
-- **`pydantic`**: For enforcing strict JSON schemas on the LLM output.
+- **`pydantic`**: For enforcing strict schema structures on the normalized API data.
 - **`google-cloud-storage`**: For stateless file persistence.
 
 ## ⚠️ Disclaimer

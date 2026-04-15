@@ -154,9 +154,6 @@ def normalize_dutchie_product(raw_item: dict, store_name: str) -> dict:
     ]
     terpenes = extract_all_terpenes(raw_item, terp_sources)
     
-    tt_obj = raw_item.get("totalTerpenes") or {}
-    total_terps = get_first_valid_number(tt_obj.get("range"), tt_obj.get("value"), tt_obj)
-    
     effects_raw = raw_item.get("effects") or {}
     effects = {}
     if isinstance(effects_raw, dict):
@@ -176,7 +173,6 @@ def normalize_dutchie_product(raw_item: dict, store_name: str) -> dict:
         sale_price=sale_price,
         promos=promos,
         terpenes=terpenes,
-        total_terpenes=total_terps,
         effects=effects,
         source_store=store_name
     ).model_dump()
@@ -231,7 +227,6 @@ def normalize_trulieve_product(raw_item: dict, store_name: str) -> dict:
         sale_price=sale_price,
         promos=promos,
         terpenes=terpenes,
-        total_terpenes=0.0,
         effects={},
         source_store=store_name
     ).model_dump()
@@ -289,7 +284,6 @@ def normalize_zenleaf_product(raw_item: dict, store_name: str) -> dict:
         sale_price=sale_price,
         promos=promos,
         terpenes=terpenes,
-        total_terpenes=0.0,
         effects={},
         source_store=store_name
     ).model_dump()

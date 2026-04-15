@@ -4,14 +4,11 @@ from datetime import datetime
 from zoneinfo import ZoneInfo
 from dotenv import load_dotenv
 from flask import Flask, Response, request, jsonify
-from google import genai
-from google.genai import types
-from google.genai.errors import ClientError, ServerError
 from google.cloud import storage
 
-from models import ShoppingTrip
 from api import fetch_dutchie_data, fetch_trulieve_data, fetch_zenleaf_data
 from normalizers import normalize_dutchie_product, normalize_trulieve_product, normalize_zenleaf_product
+from engine import parse_all_promos, generate_best_cart
 
 # Load environment variables
 load_dotenv()
@@ -22,27 +19,6 @@ app = Flask(__name__)
 # ==========================================
 # Main Execution / Controller
 # ==========================================
-def sanitize_product_data(item):
-    """Recursively removes empty values and heavy junk fields (like images/URLs) to save AI tokens."""
-    if isinstance(item, list):
-        return [sanitize_product_data(i) for i in item if i]
-    elif isinstance(item, dict):
-        cleaned = {}
-        # Blacklist of noisy keys that don't help the AI pick products
-        junk_keys = {'image', 'images', 'imageurl', 'image_url', 'picture', 'assets', 'media', 'url', 'slug', 'createdat', 'updatedat', 'reviews', 'icon'}
-        for k, v in item.items():
-            if k.lower() in junk_keys:
-                continue
-            if v in (None, "", [], {}):
-                continue
-            if isinstance(v, str) and v.startswith('http') and len(v) > 15:
-                continue
-            cleaned_v = sanitize_product_data(v)
-            if cleaned_v not in (None, "", [], {}):
-                cleaned[k] = cleaned_v
-        return cleaned
-    return item
-
 def generate_deals_report():
     # 1. Define Stores to Check
     dutchie_id = "60523818a6b5d500e0fb2e31"  # Liberty Cranberry
@@ -99,30 +75,50 @@ def generate_deals_report():
 
     print(f"\n[+] Aggregated {len(master_inventory)} total products across all stores.")
     
-    # 6. Define your Personal Preferences!
-    my_preferences = (
-        "Target: 1g Indica vape cartridges, >70% THC.\n"
-        "Preferences: Prioritize Myrcene and Caryophyllene terpenes. If specific terpenes are missing, prioritize high 'Pain Relief' and 'Relaxed' effects. If both are missing, prioritize highest THC%.\n"
-        "Pricing Logic: The lowest JSON price is final. DO NOT apply percentage discounts (like '40% off')—they are already baked into the JSON price. Only recalculate for flat-rate volume deals (e.g., '4 for $99').\n"
-        "Quantity Logic: If the deal is average (close to $27), buy 4 carts. If the deal is great (well below $27), buy up to 10 carts. You can recommend anywhere between 4 and 10 carts depending on how good the price is.\n"
-        "Hard Limits: Max 10 carts. The FINAL effective price (after any valid volume bundles are applied) MUST be $26.99 or less per unit. If the effective unit price remains $27.00 or higher, REJECT IT. Do not alter or fake prices to make them fit. No total budget cap.\n"
-        "Goal: Select the single store with the best overall value."
-    )
-    
-    # 7. Sanitize inventory to strip images, nulls, and empty values, saving thousands of tokens
-    sanitized_inventory = sanitize_product_data(master_inventory)
-    
-    # 8. Get AI Recommendation
-    if sanitized_inventory:
-        # ---  DEBUGGING: DUMP NORMALIZED DATA AND SKIP GEMINI ---
-        print("\n[DEBUG] Skipping Gemini call. Saving normalized data for inspection.")
-        
-        with open("normalized_inventory.json", "w", encoding="utf-8") as f:
-            json.dump(sanitized_inventory, f, indent=2)
-        print("💾 Normalized inventory saved locally to 'normalized_inventory.json'")
+    # 6. Parse promo text into structured rules for the engine
+    for product in master_inventory:
+        product['parsed_rules'] = parse_all_promos(product.get('promos', []))
 
-        debug_message = f"DEBUG MODE: Skipped Gemini. Found {len(sanitized_inventory)} normalized products. Check local 'normalized_inventory.json'."
-        return debug_message, debug_message
+    # 7. Run Python Rule Engine
+    if master_inventory:
+        best_cart = generate_best_cart(master_inventory)
+        
+        if not best_cart:
+            return "No combinations found under $27 per cart today.", "No qualifying deals found under $27 today."
+            
+        # Format the winning cart exactly like the old Gemini Markdown format
+        md_output = f"# Python Engine Recommendation\n\n"
+        md_output += f"**Recommended Dispensary:** {best_cart.get('recommended_dispensary', 'N/A')}\n"
+        md_output += f"**Total Estimated Cost:** ${best_cart.get('total_estimated_cost', 0):.2f} (${best_cart.get('effective_unit_price', 0):.2f}/ea)\n"
+        md_output += f"**Math Check:** {best_cart.get('math_scratchpad', 'N/A')}\n\n"
+        md_output += f"### Overall Justification\n{best_cart.get('overall_justification', 'N/A')}\n\n"
+        md_output += f"### Items to Buy\n"
+        
+        for item in best_cart.get('items_to_buy', []):
+            terps_str = ", ".join([f"{k} {v}%" for k, v in item.get('terpenes', {}).items()]) or "Unknown"
+            md_output += f"- **{item.get('quantity', 1)}x {item.get('product_name', 'Unknown')}** ({item.get('weight', 'N/A')})\n"
+            md_output += f"  - **Unit Price:** ${item.get('unit_price', 0):.2f}\n"
+            md_output += f"  - **Discount:** {item.get('applied_discount', 'None')}\n"
+            md_output += f"  - **Terpenes:** {terps_str}\n"
+            md_output += f"  - **Justification:** {item.get('justification', 'N/A')}\n"
+            
+        print("\n" + "="*60 + "\n")
+        print(md_output)
+        print("="*60 + "\n")
+        
+        # Save locally for /list
+        with open("/tmp/latest_report.md", "w", encoding="utf-8") as f:
+            f.write(md_output)
+            
+        # Also dump a copy to the local project folder for easy reading during development
+        try:
+            with open("latest_report.md", "w", encoding="utf-8") as f:
+                f.write(md_output)
+        except Exception:
+            pass # Safely ignore on Cloud Run since its file system is read-only
+            
+        speech_text = f"I recommend going to {best_cart['recommended_dispensary']}. The total estimated cost for your cart is ${best_cart['total_estimated_cost']:.2f}."
+        return speech_text, md_output
             
     return f"No deals found. Master inventory contained {len(master_inventory)} items.", "No deals found."
 
@@ -135,8 +131,8 @@ def run_deals_webhook():
     print("Webhook triggered by Siri/Cloud!")
     speech_text, full_report = generate_deals_report()
     
-    # Hardcoded Cloud Run URL for the list page
-    list_url = "https://mmj-deals-finder-9234350374.us-central1.run.app/list"
+    # Dynamically grab the server URL so it works locally AND in the cloud
+    list_url = f"{request.host_url.rstrip('/')}/list"
     display_text = f"{speech_text}\n\n# [🔗 Tap here to view your full shopping list]({list_url})"
     
     # Return JSON so the iOS Shortcut can separate spoken text from displayed text
@@ -202,6 +198,6 @@ if __name__ == "__main__":
     # To run the web server locally for testing:
     # 1. Make sure your venv is active: source venv/bin/activate
     # 2. Run this file: python main.py
-    # 3. Open your browser to http://127.0.0.1:5000/
-    print("Starting local Flask server for testing at http://127.0.0.1:5000")
-    app.run(debug=True, port=5000)
+    # 3. Open your browser to http://127.0.0.1:5001/
+    print("Starting local Flask server for testing at http://127.0.0.1:5001")
+    app.run(debug=True, port=5001)
