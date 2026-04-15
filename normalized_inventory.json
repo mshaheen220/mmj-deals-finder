@@ -1,0 +1,1797 @@
+[
+  {
+    "product_name": "Grape GG | 1g",
+    "brand": "Strane Stash",
+    "strain_type": "Indica",
+    "category": "Vaporizers",
+    "weight": "1g",
+    "thc_percentage": 82.25,
+    "msrp_price": 50.0,
+    "sale_price": 30.0,
+    "promos": [
+      "50% off 6+ Strane and Garcia Hand Picked! (Excludes Alien Mints 3.5g) ",
+      "30% STOREWIDE SALE!",
+      "40% off Strane, Garcia Hand Picked, and Liberty!"
+    ],
+    "source_store": "Liberty Cannabis - Cranberry Township",
+    "parsed_rules": [
+      {
+        "type": "bulk_percent",
+        "discount_percent": 0.5,
+        "required_quantity": 6,
+        "scope": "brand",
+        "brands": [
+          "Strane",
+          "Garcia Hand Picked"
+        ]
+      },
+      {
+        "type": "standard_percent",
+        "discount_percent": 0.3,
+        "required_quantity": 1,
+        "scope": "storewide",
+        "brands": []
+      },
+      {
+        "type": "standard_percent",
+        "discount_percent": 0.4,
+        "required_quantity": 1,
+        "scope": "brand",
+        "brands": [
+          "Strane",
+          "Garcia Hand Picked",
+          "Liberty"
+        ]
+      }
+    ]
+  },
+  {
+    "product_name": "Cloudwalker OG | 1g",
+    "brand": "Strane Stash",
+    "strain_type": "Indica",
+    "category": "Vaporizers",
+    "weight": "1g",
+    "thc_percentage": 82.39,
+    "msrp_price": 50.0,
+    "sale_price": 30.0,
+    "promos": [
+      "50% off 6+ Strane and Garcia Hand Picked! (Excludes Alien Mints 3.5g) ",
+      "30% STOREWIDE SALE!",
+      "40% off Strane, Garcia Hand Picked, and Liberty!"
+    ],
+    "source_store": "Liberty Cannabis - Cranberry Township",
+    "parsed_rules": [
+      {
+        "type": "bulk_percent",
+        "discount_percent": 0.5,
+        "required_quantity": 6,
+        "scope": "brand",
+        "brands": [
+          "Strane",
+          "Garcia Hand Picked"
+        ]
+      },
+      {
+        "type": "standard_percent",
+        "discount_percent": 0.3,
+        "required_quantity": 1,
+        "scope": "storewide",
+        "brands": []
+      },
+      {
+        "type": "standard_percent",
+        "discount_percent": 0.4,
+        "required_quantity": 1,
+        "scope": "brand",
+        "brands": [
+          "Strane",
+          "Garcia Hand Picked",
+          "Liberty"
+        ]
+      }
+    ]
+  },
+  {
+    "product_name": "Jungle Kush | 1g",
+    "brand": "Strane",
+    "strain_type": "Indica",
+    "category": "Vaporizers",
+    "weight": "1g",
+    "thc_percentage": 84.84,
+    "msrp_price": 45.0,
+    "sale_price": 27.0,
+    "promos": [
+      "50% off 6+ Strane and Garcia Hand Picked! (Excludes Alien Mints 3.5g) ",
+      "30% STOREWIDE SALE!",
+      "40% off Strane, Garcia Hand Picked, and Liberty!"
+    ],
+    "source_store": "Liberty Cannabis - Cranberry Township",
+    "parsed_rules": [
+      {
+        "type": "bulk_percent",
+        "discount_percent": 0.5,
+        "required_quantity": 6,
+        "scope": "brand",
+        "brands": [
+          "Strane",
+          "Garcia Hand Picked"
+        ]
+      },
+      {
+        "type": "standard_percent",
+        "discount_percent": 0.3,
+        "required_quantity": 1,
+        "scope": "storewide",
+        "brands": []
+      },
+      {
+        "type": "standard_percent",
+        "discount_percent": 0.4,
+        "required_quantity": 1,
+        "scope": "brand",
+        "brands": [
+          "Strane",
+          "Garcia Hand Picked",
+          "Liberty"
+        ]
+      }
+    ]
+  },
+  {
+    "product_name": "Frosted Jungle | 1g",
+    "brand": "Strane",
+    "strain_type": "Indica",
+    "category": "Vaporizers",
+    "weight": "1g",
+    "thc_percentage": 80.25,
+    "msrp_price": 45.0,
+    "sale_price": 27.0,
+    "promos": [
+      "50% off 6+ Strane and Garcia Hand Picked! (Excludes Alien Mints 3.5g) ",
+      "30% STOREWIDE SALE!",
+      "40% off Strane, Garcia Hand Picked, and Liberty!"
+    ],
+    "effects": {
+      "Calm": 9.0,
+      "Energetic": 5.0,
+      "Happy": 8.0,
+      "Relaxed": 6.0
+    },
+    "source_store": "Liberty Cannabis - Cranberry Township",
+    "parsed_rules": [
+      {
+        "type": "bulk_percent",
+        "discount_percent": 0.5,
+        "required_quantity": 6,
+        "scope": "brand",
+        "brands": [
+          "Strane",
+          "Garcia Hand Picked"
+        ]
+      },
+      {
+        "type": "standard_percent",
+        "discount_percent": 0.3,
+        "required_quantity": 1,
+        "scope": "storewide",
+        "brands": []
+      },
+      {
+        "type": "standard_percent",
+        "discount_percent": 0.4,
+        "required_quantity": 1,
+        "scope": "brand",
+        "brands": [
+          "Strane",
+          "Garcia Hand Picked",
+          "Liberty"
+        ]
+      }
+    ]
+  },
+  {
+    "product_name": "Super Gremlin | 1g",
+    "brand": "Strane",
+    "strain_type": "Indica",
+    "category": "Vaporizers",
+    "weight": "1g",
+    "thc_percentage": 85.06,
+    "msrp_price": 45.0,
+    "sale_price": 27.0,
+    "promos": [
+      "50% off 6+ Strane and Garcia Hand Picked! (Excludes Alien Mints 3.5g) ",
+      "30% STOREWIDE SALE!",
+      "40% off Strane, Garcia Hand Picked, and Liberty!"
+    ],
+    "effects": {
+      "Happy": 8.0,
+      "Relaxed": 9.0,
+      "Sleepy": 8.0,
+      "Euphoric": 8.0
+    },
+    "source_store": "Liberty Cannabis - Cranberry Township",
+    "parsed_rules": [
+      {
+        "type": "bulk_percent",
+        "discount_percent": 0.5,
+        "required_quantity": 6,
+        "scope": "brand",
+        "brands": [
+          "Strane",
+          "Garcia Hand Picked"
+        ]
+      },
+      {
+        "type": "standard_percent",
+        "discount_percent": 0.3,
+        "required_quantity": 1,
+        "scope": "storewide",
+        "brands": []
+      },
+      {
+        "type": "standard_percent",
+        "discount_percent": 0.4,
+        "required_quantity": 1,
+        "scope": "brand",
+        "brands": [
+          "Strane",
+          "Garcia Hand Picked",
+          "Liberty"
+        ]
+      }
+    ]
+  },
+  {
+    "product_name": "Cherry Chew | 1g",
+    "brand": "Strane Stash",
+    "strain_type": "Indica",
+    "category": "Vaporizers",
+    "weight": "1g",
+    "thc_percentage": 83.85,
+    "msrp_price": 50.0,
+    "sale_price": 30.0,
+    "promos": [
+      "50% off 6+ Strane and Garcia Hand Picked! (Excludes Alien Mints 3.5g) ",
+      "30% STOREWIDE SALE!",
+      "40% off Strane, Garcia Hand Picked, and Liberty!"
+    ],
+    "effects": {
+      "Relaxed": 9.0,
+      "Sleepy": 8.0,
+      "Happy": 8.0,
+      "Euphoric": 8.0
+    },
+    "source_store": "Liberty Cannabis - Cranberry Township",
+    "parsed_rules": [
+      {
+        "type": "bulk_percent",
+        "discount_percent": 0.5,
+        "required_quantity": 6,
+        "scope": "brand",
+        "brands": [
+          "Strane",
+          "Garcia Hand Picked"
+        ]
+      },
+      {
+        "type": "standard_percent",
+        "discount_percent": 0.3,
+        "required_quantity": 1,
+        "scope": "storewide",
+        "brands": []
+      },
+      {
+        "type": "standard_percent",
+        "discount_percent": 0.4,
+        "required_quantity": 1,
+        "scope": "brand",
+        "brands": [
+          "Strane",
+          "Garcia Hand Picked",
+          "Liberty"
+        ]
+      }
+    ]
+  },
+  {
+    "product_name": "Golden Pineapple | 1g",
+    "brand": "Strane",
+    "strain_type": "Indica",
+    "category": "Vaporizers",
+    "weight": "1g",
+    "thc_percentage": 84.05,
+    "msrp_price": 45.0,
+    "sale_price": 27.0,
+    "promos": [
+      "50% off 6+ Strane and Garcia Hand Picked! (Excludes Alien Mints 3.5g) ",
+      "30% STOREWIDE SALE!",
+      "40% off Strane, Garcia Hand Picked, and Liberty!"
+    ],
+    "source_store": "Liberty Cannabis - Cranberry Township",
+    "parsed_rules": [
+      {
+        "type": "bulk_percent",
+        "discount_percent": 0.5,
+        "required_quantity": 6,
+        "scope": "brand",
+        "brands": [
+          "Strane",
+          "Garcia Hand Picked"
+        ]
+      },
+      {
+        "type": "standard_percent",
+        "discount_percent": 0.3,
+        "required_quantity": 1,
+        "scope": "storewide",
+        "brands": []
+      },
+      {
+        "type": "standard_percent",
+        "discount_percent": 0.4,
+        "required_quantity": 1,
+        "scope": "brand",
+        "brands": [
+          "Strane",
+          "Garcia Hand Picked",
+          "Liberty"
+        ]
+      }
+    ]
+  },
+  {
+    "product_name": "Mendocino Purps | 1g",
+    "brand": "Strane Stash",
+    "strain_type": "Indica",
+    "category": "Vaporizers",
+    "weight": "1g",
+    "thc_percentage": 86.07,
+    "msrp_price": 50.0,
+    "sale_price": 30.0,
+    "promos": [
+      "50% off 6+ Strane and Garcia Hand Picked! (Excludes Alien Mints 3.5g) ",
+      "30% STOREWIDE SALE!",
+      "40% off Strane, Garcia Hand Picked, and Liberty!"
+    ],
+    "source_store": "Liberty Cannabis - Cranberry Township",
+    "parsed_rules": [
+      {
+        "type": "bulk_percent",
+        "discount_percent": 0.5,
+        "required_quantity": 6,
+        "scope": "brand",
+        "brands": [
+          "Strane",
+          "Garcia Hand Picked"
+        ]
+      },
+      {
+        "type": "standard_percent",
+        "discount_percent": 0.3,
+        "required_quantity": 1,
+        "scope": "storewide",
+        "brands": []
+      },
+      {
+        "type": "standard_percent",
+        "discount_percent": 0.4,
+        "required_quantity": 1,
+        "scope": "brand",
+        "brands": [
+          "Strane",
+          "Garcia Hand Picked",
+          "Liberty"
+        ]
+      }
+    ]
+  },
+  {
+    "product_name": "Compound Z | 1g",
+    "brand": "Strane",
+    "strain_type": "Indica",
+    "category": "Vaporizers",
+    "weight": "1g",
+    "thc_percentage": 83.91,
+    "msrp_price": 45.0,
+    "sale_price": 27.0,
+    "promos": [
+      "50% off 6+ Strane and Garcia Hand Picked! (Excludes Alien Mints 3.5g) ",
+      "30% STOREWIDE SALE!",
+      "40% off Strane, Garcia Hand Picked, and Liberty!"
+    ],
+    "source_store": "Liberty Cannabis - Cranberry Township",
+    "parsed_rules": [
+      {
+        "type": "bulk_percent",
+        "discount_percent": 0.5,
+        "required_quantity": 6,
+        "scope": "brand",
+        "brands": [
+          "Strane",
+          "Garcia Hand Picked"
+        ]
+      },
+      {
+        "type": "standard_percent",
+        "discount_percent": 0.3,
+        "required_quantity": 1,
+        "scope": "storewide",
+        "brands": []
+      },
+      {
+        "type": "standard_percent",
+        "discount_percent": 0.4,
+        "required_quantity": 1,
+        "scope": "brand",
+        "brands": [
+          "Strane",
+          "Garcia Hand Picked",
+          "Liberty"
+        ]
+      }
+    ]
+  },
+  {
+    "product_name": "Nutty Putty | 1g",
+    "brand": "Strane",
+    "strain_type": "Indica",
+    "category": "Vaporizers",
+    "weight": "1g",
+    "thc_percentage": 80.05,
+    "msrp_price": 45.0,
+    "sale_price": 27.0,
+    "promos": [
+      "60% off 8+ Featured Prodcuts!",
+      "50% off 6+ Strane and Garcia Hand Picked! (Excludes Alien Mints 3.5g) ",
+      "30% STOREWIDE SALE!",
+      "40% off Strane, Garcia Hand Picked, and Liberty!"
+    ],
+    "effects": {
+      "Relaxed": 9.0,
+      "Sleepy": 8.0,
+      "Happy": 8.0,
+      "Euphoric": 8.0
+    },
+    "source_store": "Liberty Cannabis - Cranberry Township",
+    "parsed_rules": [
+      {
+        "type": "bulk_percent",
+        "discount_percent": 0.6,
+        "required_quantity": 8,
+        "scope": "product",
+        "brands": []
+      },
+      {
+        "type": "bulk_percent",
+        "discount_percent": 0.5,
+        "required_quantity": 6,
+        "scope": "brand",
+        "brands": [
+          "Strane",
+          "Garcia Hand Picked"
+        ]
+      },
+      {
+        "type": "standard_percent",
+        "discount_percent": 0.3,
+        "required_quantity": 1,
+        "scope": "storewide",
+        "brands": []
+      },
+      {
+        "type": "standard_percent",
+        "discount_percent": 0.4,
+        "required_quantity": 1,
+        "scope": "brand",
+        "brands": [
+          "Strane",
+          "Garcia Hand Picked",
+          "Liberty"
+        ]
+      }
+    ]
+  },
+  {
+    "product_name": "Loud Cake | 1g",
+    "brand": "Strane",
+    "strain_type": "Indica",
+    "category": "Vaporizers",
+    "weight": "1g",
+    "thc_percentage": 80.48,
+    "msrp_price": 45.0,
+    "sale_price": 27.0,
+    "promos": [
+      "50% off 6+ Strane and Garcia Hand Picked! (Excludes Alien Mints 3.5g) ",
+      "30% STOREWIDE SALE!",
+      "40% off Strane, Garcia Hand Picked, and Liberty!"
+    ],
+    "effects": {
+      "Calm": 9.0,
+      "Energetic": 5.0,
+      "Happy": 8.0,
+      "Relaxed": 6.0
+    },
+    "source_store": "Liberty Cannabis - Cranberry Township",
+    "parsed_rules": [
+      {
+        "type": "bulk_percent",
+        "discount_percent": 0.5,
+        "required_quantity": 6,
+        "scope": "brand",
+        "brands": [
+          "Strane",
+          "Garcia Hand Picked"
+        ]
+      },
+      {
+        "type": "standard_percent",
+        "discount_percent": 0.3,
+        "required_quantity": 1,
+        "scope": "storewide",
+        "brands": []
+      },
+      {
+        "type": "standard_percent",
+        "discount_percent": 0.4,
+        "required_quantity": 1,
+        "scope": "brand",
+        "brands": [
+          "Strane",
+          "Garcia Hand Picked",
+          "Liberty"
+        ]
+      }
+    ]
+  },
+  {
+    "product_name": "Rntz Berries | 1g",
+    "brand": "Strane",
+    "strain_type": "Indica",
+    "category": "Vaporizers",
+    "weight": "1g",
+    "thc_percentage": 82.66,
+    "msrp_price": 45.0,
+    "sale_price": 27.0,
+    "promos": [
+      "50% off 6+ Strane and Garcia Hand Picked! (Excludes Alien Mints 3.5g) ",
+      "30% STOREWIDE SALE!",
+      "40% off Strane, Garcia Hand Picked, and Liberty!"
+    ],
+    "effects": {
+      "Relaxed": 9.0,
+      "Sleepy": 8.0,
+      "Happy": 8.0,
+      "Euphoric": 8.0
+    },
+    "source_store": "Liberty Cannabis - Cranberry Township",
+    "parsed_rules": [
+      {
+        "type": "bulk_percent",
+        "discount_percent": 0.5,
+        "required_quantity": 6,
+        "scope": "brand",
+        "brands": [
+          "Strane",
+          "Garcia Hand Picked"
+        ]
+      },
+      {
+        "type": "standard_percent",
+        "discount_percent": 0.3,
+        "required_quantity": 1,
+        "scope": "storewide",
+        "brands": []
+      },
+      {
+        "type": "standard_percent",
+        "discount_percent": 0.4,
+        "required_quantity": 1,
+        "scope": "brand",
+        "brands": [
+          "Strane",
+          "Garcia Hand Picked",
+          "Liberty"
+        ]
+      }
+    ]
+  },
+  {
+    "product_name": "Dragonfly | 1g",
+    "brand": "Strane Stash",
+    "strain_type": "Indica",
+    "category": "Vaporizers",
+    "weight": "1g",
+    "thc_percentage": 80.77,
+    "msrp_price": 50.0,
+    "sale_price": 30.0,
+    "promos": [
+      "50% off 6+ Strane and Garcia Hand Picked! (Excludes Alien Mints 3.5g) ",
+      "30% STOREWIDE SALE!",
+      "40% off Strane, Garcia Hand Picked, and Liberty!"
+    ],
+    "effects": {
+      "Relaxed": 9.0,
+      "Sleepy": 8.0,
+      "Happy": 8.0,
+      "Euphoric": 8.0
+    },
+    "source_store": "Liberty Cannabis - Cranberry Township",
+    "parsed_rules": [
+      {
+        "type": "bulk_percent",
+        "discount_percent": 0.5,
+        "required_quantity": 6,
+        "scope": "brand",
+        "brands": [
+          "Strane",
+          "Garcia Hand Picked"
+        ]
+      },
+      {
+        "type": "standard_percent",
+        "discount_percent": 0.3,
+        "required_quantity": 1,
+        "scope": "storewide",
+        "brands": []
+      },
+      {
+        "type": "standard_percent",
+        "discount_percent": 0.4,
+        "required_quantity": 1,
+        "scope": "brand",
+        "brands": [
+          "Strane",
+          "Garcia Hand Picked",
+          "Liberty"
+        ]
+      }
+    ]
+  },
+  {
+    "product_name": "PGRG Cartridge 1g",
+    "brand": "Moxie",
+    "strain_type": "INDICA",
+    "category": "CARTRIDGES",
+    "weight": "1g",
+    "thc_percentage": 81.95,
+    "msrp_price": 75.0,
+    "sale_price": 37.5,
+    "promos": [
+      "Buy 2 Moxie Vapes, Get a Moxie Battery for 90% off (While Supplies Last)",
+      "PA 50% off Moxie"
+    ],
+    "terpenes": {
+      "Bisabolol": 0.08,
+      "Limonene": 0.06,
+      "Humulene": 0.02,
+      "Pinene": 0.01
+    },
+    "source_store": "Trulieve - Cranberry",
+    "parsed_rules": [
+      {
+        "type": "standard_percent",
+        "discount_percent": 0.9,
+        "required_quantity": 1,
+        "scope": "storewide",
+        "brands": []
+      },
+      {
+        "type": "standard_percent",
+        "discount_percent": 0.5,
+        "required_quantity": 1,
+        "scope": "storewide",
+        "brands": []
+      }
+    ]
+  },
+  {
+    "product_name": "Space Pop Cartridge 1g",
+    "brand": "Moxie",
+    "strain_type": "INDICA",
+    "category": "CARTRIDGES",
+    "weight": "1g",
+    "thc_percentage": 76.02,
+    "msrp_price": 75.0,
+    "sale_price": 37.5,
+    "promos": [
+      "Buy 2 Moxie Vapes, Get a Moxie Battery for 90% off (While Supplies Last)",
+      "PA 50% off Moxie"
+    ],
+    "terpenes": {
+      "Bisabolol": 0.07,
+      "Pinene": 0.01,
+      "Beta Caryophyllene": 0.0,
+      "Caryophyllene Oxide": 0.0
+    },
+    "source_store": "Trulieve - Cranberry",
+    "parsed_rules": [
+      {
+        "type": "standard_percent",
+        "discount_percent": 0.9,
+        "required_quantity": 1,
+        "scope": "storewide",
+        "brands": []
+      },
+      {
+        "type": "standard_percent",
+        "discount_percent": 0.5,
+        "required_quantity": 1,
+        "scope": "storewide",
+        "brands": []
+      }
+    ]
+  },
+  {
+    "product_name": "Notorious GSC CD Cart 1000mg",
+    "brand": "\uff06Shine",
+    "strain_type": "INDICA",
+    "category": "CARTRIDGES",
+    "weight": "1g",
+    "thc_percentage": 83.55,
+    "msrp_price": 48.0,
+    "sale_price": 33.6,
+    "promos": [
+      "30% off GTI, Insa, Cresco, Standard Farms, Terrascend & More! (excludes Featured Vapes, Alien Labs & Connected)"
+    ],
+    "terpenes": {
+      "Beta Myrcene": 1.7,
+      "Beta Caryophyllene": 0.8,
+      "Limonene": 0.59,
+      "Linalool": 0.4
+    },
+    "source_store": "Trulieve - Cranberry",
+    "parsed_rules": [
+      {
+        "type": "standard_percent",
+        "discount_percent": 0.3,
+        "required_quantity": 1,
+        "scope": "brand",
+        "brands": [
+          "Cresco",
+          "GTI",
+          "INSA",
+          "Standard Farms"
+        ]
+      }
+    ]
+  },
+  {
+    "product_name": "Cheese Wiz x LA Kush K Live Sauce Cartridge 1g",
+    "brand": "Modern Flower",
+    "strain_type": "INDICA",
+    "category": "CARTRIDGES",
+    "weight": "1g",
+    "thc_percentage": 73.78,
+    "msrp_price": 55.0,
+    "sale_price": 30.25,
+    "promos": [
+      "45% off Modern Flower (excludes ground & Live Rosin)"
+    ],
+    "terpenes": {
+      "Limonene": 0.92,
+      "Beta Caryophyllene": 0.87,
+      "Linalool": 0.65,
+      "Beta Myrcene": 0.45
+    },
+    "source_store": "Trulieve - Cranberry",
+    "parsed_rules": [
+      {
+        "type": "standard_percent",
+        "discount_percent": 0.45,
+        "required_quantity": 1,
+        "scope": "storewide",
+        "brands": []
+      }
+    ]
+  },
+  {
+    "product_name": "Cherryberry Cream Cart 1000mg",
+    "brand": "Supply",
+    "strain_type": "INDICA",
+    "category": "CARTRIDGES",
+    "weight": "1g",
+    "thc_percentage": 84.42,
+    "msrp_price": 45.0,
+    "sale_price": 31.5,
+    "promos": [
+      "30% off GTI, Insa, Cresco, Standard Farms, Terrascend & More! (excludes Featured Vapes, Alien Labs & Connected)"
+    ],
+    "terpenes": {
+      "Beta Myrcene": 0.89,
+      "Limonene": 0.49,
+      "Ocimene": 0.37,
+      "Beta Caryophyllene": 0.35
+    },
+    "source_store": "Trulieve - Cranberry",
+    "parsed_rules": [
+      {
+        "type": "standard_percent",
+        "discount_percent": 0.3,
+        "required_quantity": 1,
+        "scope": "brand",
+        "brands": [
+          "Cresco",
+          "GTI",
+          "INSA",
+          "Standard Farms"
+        ]
+      }
+    ]
+  },
+  {
+    "product_name": "Chimera #3 Distillate Cart 1000mg",
+    "brand": "Double Bear",
+    "strain_type": "INDICA",
+    "category": "CARTRIDGES",
+    "weight": "1g",
+    "thc_percentage": 86.13,
+    "msrp_price": 50.0,
+    "sale_price": 50.0,
+    "terpenes": {
+      "Limonene": 1.81,
+      "Linalool": 0.53,
+      "Beta Pinene": 0.31,
+      "Pinene": 0.24
+    },
+    "source_store": "Trulieve - Cranberry",
+    "parsed_rules": []
+  },
+  {
+    "product_name": "No Problem Cart 1000mg",
+    "brand": "Supply",
+    "strain_type": "INDICA",
+    "category": "CARTRIDGES",
+    "weight": "1g",
+    "thc_percentage": 79.36,
+    "msrp_price": 45.0,
+    "sale_price": 31.5,
+    "promos": [
+      "30% off GTI, Insa, Cresco, Standard Farms, Terrascend & More! (excludes Featured Vapes, Alien Labs & Connected)"
+    ],
+    "terpenes": {
+      "Limonene": 1.15,
+      "Linalool": 0.55,
+      "Beta Caryophyllene": 0.47,
+      "Humulene": 0.13
+    },
+    "source_store": "Trulieve - Cranberry",
+    "parsed_rules": [
+      {
+        "type": "standard_percent",
+        "discount_percent": 0.3,
+        "required_quantity": 1,
+        "scope": "brand",
+        "brands": [
+          "Cresco",
+          "GTI",
+          "INSA",
+          "Standard Farms"
+        ]
+      }
+    ]
+  },
+  {
+    "product_name": "PNK CRTZ Live Sauce Cartridge 0.5g",
+    "brand": "Modern Flower",
+    "strain_type": "INDICA",
+    "category": "CARTRIDGES",
+    "weight": "1g",
+    "thc_percentage": 73.42,
+    "msrp_price": 55.0,
+    "sale_price": 30.25,
+    "promos": [
+      "45% off Modern Flower (excludes ground & Live Rosin)"
+    ],
+    "terpenes": {
+      "Limonene": 1.54,
+      "Beta Caryophyllene": 1.25,
+      "Linalool": 0.68,
+      "Beta Myrcene": 0.53
+    },
+    "source_store": "Trulieve - Cranberry",
+    "parsed_rules": [
+      {
+        "type": "standard_percent",
+        "discount_percent": 0.45,
+        "required_quantity": 1,
+        "scope": "storewide",
+        "brands": []
+      }
+    ]
+  },
+  {
+    "product_name": "Slippery Gorilla",
+    "brand": "Supply",
+    "strain_type": "INDICA",
+    "category": "CARTRIDGES",
+    "weight": "1g",
+    "thc_percentage": 82.79,
+    "msrp_price": 45.0,
+    "sale_price": 31.5,
+    "promos": [
+      "30% off GTI, Insa, Cresco, Standard Farms, Terrascend & More! (excludes Featured Vapes, Alien Labs & Connected)"
+    ],
+    "terpenes": {
+      "Limonene": 0.74,
+      "Beta Caryophyllene": 0.64,
+      "Beta Myrcene": 0.28,
+      "Pinene": 0.2
+    },
+    "source_store": "Trulieve - Cranberry",
+    "parsed_rules": [
+      {
+        "type": "standard_percent",
+        "discount_percent": 0.3,
+        "required_quantity": 1,
+        "scope": "brand",
+        "brands": [
+          "Cresco",
+          "GTI",
+          "INSA",
+          "Standard Farms"
+        ]
+      }
+    ]
+  },
+  {
+    "product_name": "RTBR Cartridge 1g",
+    "brand": "Moxie",
+    "strain_type": "INDICA",
+    "category": "CARTRIDGES",
+    "weight": "1g",
+    "thc_percentage": 75.37,
+    "msrp_price": 75.0,
+    "sale_price": 37.5,
+    "promos": [
+      "Buy 2 Moxie Vapes, Get a Moxie Battery for 90% off (While Supplies Last)",
+      "PA 50% off Moxie"
+    ],
+    "terpenes": {
+      "Bisabolol": 0.0,
+      "Beta Caryophyllene": 0.0,
+      "Caryophyllene Oxide": 0.0,
+      "Beta Myrcene": 0.0
+    },
+    "source_store": "Trulieve - Cranberry",
+    "parsed_rules": [
+      {
+        "type": "standard_percent",
+        "discount_percent": 0.9,
+        "required_quantity": 1,
+        "scope": "storewide",
+        "brands": []
+      },
+      {
+        "type": "standard_percent",
+        "discount_percent": 0.5,
+        "required_quantity": 1,
+        "scope": "storewide",
+        "brands": []
+      }
+    ]
+  },
+  {
+    "product_name": "RTBR Cartridge 1g",
+    "brand": "Moxie",
+    "strain_type": "INDICA",
+    "category": "CARTRIDGES",
+    "weight": "1g",
+    "thc_percentage": 75.4,
+    "msrp_price": 75.0,
+    "sale_price": 37.5,
+    "promos": [
+      "Buy 2 Moxie Vapes, Get a Moxie Battery for 90% off (While Supplies Last)",
+      "PA 50% off Moxie"
+    ],
+    "terpenes": {
+      "Bisabolol": 0.06,
+      "Beta Caryophyllene": 0.0,
+      "Caryophyllene Oxide": 0.0,
+      "Beta Myrcene": 0.0
+    },
+    "source_store": "Trulieve - Zelienople",
+    "parsed_rules": [
+      {
+        "type": "standard_percent",
+        "discount_percent": 0.9,
+        "required_quantity": 1,
+        "scope": "storewide",
+        "brands": []
+      },
+      {
+        "type": "standard_percent",
+        "discount_percent": 0.5,
+        "required_quantity": 1,
+        "scope": "storewide",
+        "brands": []
+      }
+    ]
+  },
+  {
+    "product_name": "Space Pop Cartridge 1g",
+    "brand": "Moxie",
+    "strain_type": "INDICA",
+    "category": "CARTRIDGES",
+    "weight": "1g",
+    "thc_percentage": 81.13,
+    "msrp_price": 75.0,
+    "sale_price": 37.5,
+    "promos": [
+      "Buy 2 Moxie Vapes, Get a Moxie Battery for 90% off (While Supplies Last)",
+      "PA 50% off Moxie"
+    ],
+    "terpenes": {
+      "Bisabolol": 0.08,
+      "Beta Caryophyllene": 0.03,
+      "Pinene": 0.01,
+      "Caryophyllene Oxide": 0.0
+    },
+    "source_store": "Trulieve - Zelienople",
+    "parsed_rules": [
+      {
+        "type": "standard_percent",
+        "discount_percent": 0.9,
+        "required_quantity": 1,
+        "scope": "storewide",
+        "brands": []
+      },
+      {
+        "type": "standard_percent",
+        "discount_percent": 0.5,
+        "required_quantity": 1,
+        "scope": "storewide",
+        "brands": []
+      }
+    ]
+  },
+  {
+    "product_name": "Stone Fruit Cartridge 1g",
+    "brand": "Moxie",
+    "strain_type": "INDICA",
+    "category": "CARTRIDGES",
+    "weight": "1g",
+    "thc_percentage": 77.45,
+    "msrp_price": 75.0,
+    "sale_price": 37.5,
+    "promos": [
+      "Buy 2 Moxie Vapes, Get a Moxie Battery for 90% off (While Supplies Last)",
+      "PA 50% off Moxie"
+    ],
+    "terpenes": {
+      "Bisabolol": 0.06,
+      "Limonene": 0.03,
+      "Beta Caryophyllene": 0.02,
+      "Beta Myrcene": 0.02
+    },
+    "source_store": "Trulieve - Zelienople",
+    "parsed_rules": [
+      {
+        "type": "standard_percent",
+        "discount_percent": 0.9,
+        "required_quantity": 1,
+        "scope": "storewide",
+        "brands": []
+      },
+      {
+        "type": "standard_percent",
+        "discount_percent": 0.5,
+        "required_quantity": 1,
+        "scope": "storewide",
+        "brands": []
+      }
+    ]
+  },
+  {
+    "product_name": "Cheese Wiz x LA Kush K Live Sauce Cartridge 1g",
+    "brand": "Modern Flower",
+    "strain_type": "INDICA",
+    "category": "CARTRIDGES",
+    "weight": "1g",
+    "thc_percentage": 73.78,
+    "msrp_price": 55.0,
+    "sale_price": 30.25,
+    "promos": [
+      "45% off Modern Flower (excludes ground & Live Rosin)"
+    ],
+    "terpenes": {
+      "Limonene": 0.92,
+      "Beta Caryophyllene": 0.87,
+      "Linalool": 0.65,
+      "Beta Myrcene": 0.45
+    },
+    "source_store": "Trulieve - Zelienople",
+    "parsed_rules": [
+      {
+        "type": "standard_percent",
+        "discount_percent": 0.45,
+        "required_quantity": 1,
+        "scope": "storewide",
+        "brands": []
+      }
+    ]
+  },
+  {
+    "product_name": "No Problem Cart",
+    "brand": "Supply",
+    "strain_type": "INDICA",
+    "category": "CARTRIDGES",
+    "weight": "1g",
+    "thc_percentage": 79.36,
+    "msrp_price": 45.0,
+    "sale_price": 31.5,
+    "promos": [
+      "30% off GTI, Insa, Cresco, Standard Farms, Terrascend & More! (excludes Featured Vapes, Alien Labs & Connected)"
+    ],
+    "terpenes": {
+      "Limonene": 1.15,
+      "Linalool": 0.55,
+      "Beta Caryophyllene": 0.47,
+      "Humulene": 0.13
+    },
+    "source_store": "Trulieve - Zelienople",
+    "parsed_rules": [
+      {
+        "type": "standard_percent",
+        "discount_percent": 0.3,
+        "required_quantity": 1,
+        "scope": "brand",
+        "brands": [
+          "Cresco",
+          "GTI",
+          "INSA",
+          "Standard Farms"
+        ]
+      }
+    ]
+  },
+  {
+    "product_name": "Strawberry Fields Cartridge 1g",
+    "brand": "Moxie",
+    "strain_type": "INDICA",
+    "category": "CARTRIDGES",
+    "weight": "1g",
+    "thc_percentage": 82.22,
+    "msrp_price": 75.0,
+    "sale_price": 37.5,
+    "promos": [
+      "Buy 2 Moxie Vapes, Get a Moxie Battery for 90% off (While Supplies Last)",
+      "PA 50% off Moxie"
+    ],
+    "terpenes": {
+      "Bisabolol": 0.09,
+      "Caryophyllene Oxide": 0.06,
+      "Linalool": 0.03,
+      "Beta Caryophyllene": 0.02
+    },
+    "source_store": "Trulieve - Zelienople",
+    "parsed_rules": [
+      {
+        "type": "standard_percent",
+        "discount_percent": 0.9,
+        "required_quantity": 1,
+        "scope": "storewide",
+        "brands": []
+      },
+      {
+        "type": "standard_percent",
+        "discount_percent": 0.5,
+        "required_quantity": 1,
+        "scope": "storewide",
+        "brands": []
+      }
+    ]
+  },
+  {
+    "product_name": "PNK CRTZ Live Sauce Cartridge 0.5g",
+    "brand": "Modern Flower",
+    "strain_type": "INDICA",
+    "category": "CARTRIDGES",
+    "weight": "1g",
+    "thc_percentage": 73.42,
+    "msrp_price": 55.0,
+    "sale_price": 30.25,
+    "promos": [
+      "45% off Modern Flower (excludes ground & Live Rosin)"
+    ],
+    "terpenes": {
+      "Limonene": 1.54,
+      "Beta Caryophyllene": 1.25,
+      "Linalool": 0.68,
+      "Beta Myrcene": 0.53
+    },
+    "source_store": "Trulieve - Zelienople",
+    "parsed_rules": [
+      {
+        "type": "standard_percent",
+        "discount_percent": 0.45,
+        "required_quantity": 1,
+        "scope": "storewide",
+        "brands": []
+      }
+    ]
+  },
+  {
+    "product_name": "Golden Pineapple Distillate Cart",
+    "brand": "Strane",
+    "strain_type": "INDICA",
+    "category": "CARTRIDGES",
+    "weight": "1g",
+    "thc_percentage": 84.05,
+    "msrp_price": 45.0,
+    "sale_price": 45.0,
+    "terpenes": {
+      "Beta Myrcene": 1.92,
+      "Limonene": 1.55,
+      "Linalool": 1.04,
+      "Beta Caryophyllene": 0.94
+    },
+    "source_store": "Trulieve - Zelienople",
+    "parsed_rules": []
+  },
+  {
+    "product_name": "Cherry Pi CDT Cart",
+    "brand": "Legend",
+    "strain_type": "INDICA",
+    "category": "CARTRIDGES",
+    "weight": "1g",
+    "thc_percentage": 86.43,
+    "msrp_price": 45.0,
+    "sale_price": 31.5,
+    "promos": [
+      "30% off GTI, Insa, Cresco, Standard Farms, Terrascend & More! (excludes Featured Vapes, Alien Labs & Connected)"
+    ],
+    "terpenes": {
+      "Pinene": 0.74,
+      "Beta Caryophyllene": 0.57,
+      "Beta Myrcene": 0.45,
+      "Limonene": 0.33
+    },
+    "source_store": "Trulieve - Zelienople",
+    "parsed_rules": [
+      {
+        "type": "standard_percent",
+        "discount_percent": 0.3,
+        "required_quantity": 1,
+        "scope": "brand",
+        "brands": [
+          "Cresco",
+          "GTI",
+          "INSA",
+          "Standard Farms"
+        ]
+      }
+    ]
+  },
+  {
+    "product_name": "Banoreoz Cartridge",
+    "brand": "Ozone",
+    "strain_type": "Indica",
+    "category": "Vaporizers",
+    "weight": "1g",
+    "thc_percentage": 85.3,
+    "msrp_price": 34.0,
+    "sale_price": 29.0,
+    "promos": [
+      "Everyday Bundle: 2 Ozone 1g Distillat Carts for $55",
+      "Every Day Ancillary Vape Bundle",
+      "Every Day Ancillary Bag Bundle",
+      "$5 Off 1g Ozone Distillate Cartridges!"
+    ],
+    "effects": {
+      "Relaxed": 9.0,
+      "Pain Relief": 7.0,
+      "Sleepy": 8.0,
+      "Happy": 8.0,
+      "Euphoric": 8.0
+    },
+    "source_store": "Ascend",
+    "parsed_rules": [
+      {
+        "type": "bundle",
+        "required_quantity": 2,
+        "bundle_price": 55.0,
+        "scope": "brand",
+        "brands": [
+          "Ozone"
+        ]
+      },
+      {
+        "type": "flat_discount",
+        "discount_amount": 5.0,
+        "required_quantity": 1,
+        "scope": "brand",
+        "brands": [
+          "Ozone"
+        ]
+      }
+    ]
+  },
+  {
+    "product_name": "Triangle Kush Cartridge",
+    "brand": "Ozone",
+    "strain_type": "Indica",
+    "category": "Vaporizers",
+    "weight": "1g",
+    "thc_percentage": 80.31,
+    "msrp_price": 34.0,
+    "sale_price": 29.0,
+    "promos": [
+      "Everyday Bundle: 2 Ozone 1g Distillat Carts for $55",
+      "Every Day Ancillary Vape Bundle",
+      "Every Day Ancillary Bag Bundle",
+      "$5 Off 1g Ozone Distillate Cartridges!"
+    ],
+    "effects": {
+      "Relaxed": 9.0,
+      "Pain Relief": 7.0,
+      "Sleepy": 8.0,
+      "Happy": 8.0,
+      "Euphoric": 8.0
+    },
+    "source_store": "Ascend",
+    "parsed_rules": [
+      {
+        "type": "bundle",
+        "required_quantity": 2,
+        "bundle_price": 55.0,
+        "scope": "brand",
+        "brands": [
+          "Ozone"
+        ]
+      },
+      {
+        "type": "flat_discount",
+        "discount_amount": 5.0,
+        "required_quantity": 1,
+        "scope": "brand",
+        "brands": [
+          "Ozone"
+        ]
+      }
+    ]
+  },
+  {
+    "product_name": "Cheezus Cartridge",
+    "brand": "Ozone",
+    "strain_type": "Indica",
+    "category": "Vaporizers",
+    "weight": "1g",
+    "thc_percentage": 83.43,
+    "msrp_price": 34.0,
+    "sale_price": 29.0,
+    "promos": [
+      "Everyday Bundle: 2 Ozone 1g Distillat Carts for $55",
+      "Every Day Ancillary Vape Bundle",
+      "Every Day Ancillary Bag Bundle",
+      "$5 Off 1g Ozone Distillate Cartridges!"
+    ],
+    "effects": {
+      "Relaxed": 9.0,
+      "Pain Relief": 7.0,
+      "Sleepy": 8.0,
+      "Happy": 8.0,
+      "Euphoric": 8.0
+    },
+    "source_store": "Ascend",
+    "parsed_rules": [
+      {
+        "type": "bundle",
+        "required_quantity": 2,
+        "bundle_price": 55.0,
+        "scope": "brand",
+        "brands": [
+          "Ozone"
+        ]
+      },
+      {
+        "type": "flat_discount",
+        "discount_amount": 5.0,
+        "required_quantity": 1,
+        "scope": "brand",
+        "brands": [
+          "Ozone"
+        ]
+      }
+    ]
+  },
+  {
+    "product_name": "Gelato",
+    "brand": "(the) Essence",
+    "strain_type": "Unknown",
+    "category": "Vapes",
+    "weight": "1g",
+    "thc_percentage": 71.4504,
+    "msrp_price": 50.5,
+    "sale_price": 35.35,
+    "promos": [
+      "30% Off All Verano, Savvy & (the) Essence Vapes. Excludes Hyphen Live Rosin AIO. While supplies last. Discounts cannot be combined. Offer valid at all Zen Leaf Pennsylvania dispensaries,",
+      "2 for 42% Off Verano, Savvy, (the) Essence & On The Rocks Carts. While supplies last. Discounts cannot be combined. Offer valid at all Zen Leaf Pennsylvania dispensaries,",
+      "2 for 42% Off All Verano, Savvy & (the) Essence Vapes. Excludes Hyphen Live Rosin AIO. While supplies last. Discounts cannot be combined. Offer valid at all Zen Leaf Pennsylvania dispensaries,"
+    ],
+    "source_store": "Zen Leaf - Cranberry",
+    "parsed_rules": [
+      {
+        "type": "standard_percent",
+        "discount_percent": 0.3,
+        "required_quantity": 1,
+        "scope": "brand",
+        "brands": [
+          "Verano",
+          "Savvy",
+          "Essence"
+        ]
+      },
+      {
+        "type": "bulk_percent",
+        "discount_percent": 0.42,
+        "required_quantity": 2,
+        "scope": "brand",
+        "brands": [
+          "Verano",
+          "Savvy",
+          "Essence",
+          "On The Rocks"
+        ]
+      },
+      {
+        "type": "bulk_percent",
+        "discount_percent": 0.42,
+        "required_quantity": 2,
+        "scope": "brand",
+        "brands": [
+          "Verano",
+          "Savvy",
+          "Essence"
+        ]
+      }
+    ]
+  },
+  {
+    "product_name": "Gelato Glove",
+    "brand": "(the) Essence",
+    "strain_type": "Unknown",
+    "category": "Vapes",
+    "weight": "1g",
+    "thc_percentage": 76.925,
+    "msrp_price": 50.5,
+    "sale_price": 35.35,
+    "promos": [
+      "30% Off All Verano, Savvy & (the) Essence Vapes. Excludes Hyphen Live Rosin AIO. While supplies last. Discounts cannot be combined. Offer valid at all Zen Leaf Pennsylvania dispensaries,",
+      "2 for 42% Off Verano, Savvy, (the) Essence & On The Rocks Carts. While supplies last. Discounts cannot be combined. Offer valid at all Zen Leaf Pennsylvania dispensaries,",
+      "2 for 42% Off All Verano, Savvy & (the) Essence Vapes. Excludes Hyphen Live Rosin AIO. While supplies last. Discounts cannot be combined. Offer valid at all Zen Leaf Pennsylvania dispensaries,"
+    ],
+    "source_store": "Zen Leaf - Cranberry",
+    "parsed_rules": [
+      {
+        "type": "standard_percent",
+        "discount_percent": 0.3,
+        "required_quantity": 1,
+        "scope": "brand",
+        "brands": [
+          "Verano",
+          "Savvy",
+          "Essence"
+        ]
+      },
+      {
+        "type": "bulk_percent",
+        "discount_percent": 0.42,
+        "required_quantity": 2,
+        "scope": "brand",
+        "brands": [
+          "Verano",
+          "Savvy",
+          "Essence",
+          "On The Rocks"
+        ]
+      },
+      {
+        "type": "bulk_percent",
+        "discount_percent": 0.42,
+        "required_quantity": 2,
+        "scope": "brand",
+        "brands": [
+          "Verano",
+          "Savvy",
+          "Essence"
+        ]
+      }
+    ]
+  },
+  {
+    "product_name": "Blue Afghani",
+    "brand": "(the) Essence",
+    "strain_type": "Unknown",
+    "category": "Vapes",
+    "weight": "1g",
+    "thc_percentage": 72.4734,
+    "msrp_price": 50.5,
+    "sale_price": 35.35,
+    "promos": [
+      "30% Off All Verano, Savvy & (the) Essence Vapes. Excludes Hyphen Live Rosin AIO. While supplies last. Discounts cannot be combined. Offer valid at all Zen Leaf Pennsylvania dispensaries,",
+      "2 for 42% Off Verano, Savvy, (the) Essence & On The Rocks Carts. While supplies last. Discounts cannot be combined. Offer valid at all Zen Leaf Pennsylvania dispensaries,",
+      "2 for 42% Off All Verano, Savvy & (the) Essence Vapes. Excludes Hyphen Live Rosin AIO. While supplies last. Discounts cannot be combined. Offer valid at all Zen Leaf Pennsylvania dispensaries,"
+    ],
+    "source_store": "Zen Leaf - Cranberry",
+    "parsed_rules": [
+      {
+        "type": "standard_percent",
+        "discount_percent": 0.3,
+        "required_quantity": 1,
+        "scope": "brand",
+        "brands": [
+          "Verano",
+          "Savvy",
+          "Essence"
+        ]
+      },
+      {
+        "type": "bulk_percent",
+        "discount_percent": 0.42,
+        "required_quantity": 2,
+        "scope": "brand",
+        "brands": [
+          "Verano",
+          "Savvy",
+          "Essence",
+          "On The Rocks"
+        ]
+      },
+      {
+        "type": "bulk_percent",
+        "discount_percent": 0.42,
+        "required_quantity": 2,
+        "scope": "brand",
+        "brands": [
+          "Verano",
+          "Savvy",
+          "Essence"
+        ]
+      }
+    ]
+  },
+  {
+    "product_name": "Motorbreath",
+    "brand": "(the) Essence",
+    "strain_type": "Unknown",
+    "category": "Vapes",
+    "weight": "1g",
+    "thc_percentage": 71.526,
+    "msrp_price": 50.5,
+    "sale_price": 35.35,
+    "promos": [
+      "30% Off All Verano, Savvy & (the) Essence Vapes. Excludes Hyphen Live Rosin AIO. While supplies last. Discounts cannot be combined. Offer valid at all Zen Leaf Pennsylvania dispensaries,",
+      "2 for 42% Off Verano, Savvy, (the) Essence & On The Rocks Carts. While supplies last. Discounts cannot be combined. Offer valid at all Zen Leaf Pennsylvania dispensaries,",
+      "2 for 42% Off All Verano, Savvy & (the) Essence Vapes. Excludes Hyphen Live Rosin AIO. While supplies last. Discounts cannot be combined. Offer valid at all Zen Leaf Pennsylvania dispensaries,"
+    ],
+    "source_store": "Zen Leaf - Cranberry",
+    "parsed_rules": [
+      {
+        "type": "standard_percent",
+        "discount_percent": 0.3,
+        "required_quantity": 1,
+        "scope": "brand",
+        "brands": [
+          "Verano",
+          "Savvy",
+          "Essence"
+        ]
+      },
+      {
+        "type": "bulk_percent",
+        "discount_percent": 0.42,
+        "required_quantity": 2,
+        "scope": "brand",
+        "brands": [
+          "Verano",
+          "Savvy",
+          "Essence",
+          "On The Rocks"
+        ]
+      },
+      {
+        "type": "bulk_percent",
+        "discount_percent": 0.42,
+        "required_quantity": 2,
+        "scope": "brand",
+        "brands": [
+          "Verano",
+          "Savvy",
+          "Essence"
+        ]
+      }
+    ]
+  },
+  {
+    "product_name": "Sweet Dreams",
+    "brand": "Savvy",
+    "strain_type": "Unknown",
+    "category": "Vapes",
+    "weight": "1g",
+    "thc_percentage": 76.787,
+    "msrp_price": 50.5,
+    "sale_price": 35.35,
+    "promos": [
+      "4 for $99 Savvy 1g Carts. While supplies last. Discounts cannot be combined. Valid at all Zen Leaf Pennsylvania dispensaries.",
+      "30% Off All Verano, Savvy & (the) Essence Vapes. Excludes Hyphen Live Rosin AIO. While supplies last. Discounts cannot be combined. Offer valid at all Zen Leaf Pennsylvania dispensaries,",
+      "2 for 42% Off Verano, Savvy, (the) Essence & On The Rocks Carts. While supplies last. Discounts cannot be combined. Offer valid at all Zen Leaf Pennsylvania dispensaries,",
+      "2 for 42% Off All Verano, Savvy & (the) Essence Vapes. Excludes Hyphen Live Rosin AIO. While supplies last. Discounts cannot be combined. Offer valid at all Zen Leaf Pennsylvania dispensaries,"
+    ],
+    "source_store": "Zen Leaf - Cranberry",
+    "parsed_rules": [
+      {
+        "type": "bundle",
+        "required_quantity": 4,
+        "bundle_price": 99.0,
+        "scope": "brand",
+        "brands": [
+          "Savvy"
+        ]
+      },
+      {
+        "type": "standard_percent",
+        "discount_percent": 0.3,
+        "required_quantity": 1,
+        "scope": "brand",
+        "brands": [
+          "Verano",
+          "Savvy",
+          "Essence"
+        ]
+      },
+      {
+        "type": "bulk_percent",
+        "discount_percent": 0.42,
+        "required_quantity": 2,
+        "scope": "brand",
+        "brands": [
+          "Verano",
+          "Savvy",
+          "Essence",
+          "On The Rocks"
+        ]
+      },
+      {
+        "type": "bulk_percent",
+        "discount_percent": 0.42,
+        "required_quantity": 2,
+        "scope": "brand",
+        "brands": [
+          "Verano",
+          "Savvy",
+          "Essence"
+        ]
+      }
+    ]
+  },
+  {
+    "product_name": "Mandarin Dreams",
+    "brand": "Savvy",
+    "strain_type": "Unknown",
+    "category": "Vapes",
+    "weight": "1g",
+    "thc_percentage": 79.253,
+    "msrp_price": 50.5,
+    "sale_price": 35.35,
+    "promos": [
+      "30% off",
+      "4 for $99 Savvy 1g Carts. While supplies last. Discounts cannot be combined. Valid at all Zen Leaf Pennsylvania dispensaries.",
+      "30% Off All Verano, Savvy & (the) Essence Vapes. Excludes Hyphen Live Rosin AIO. While supplies last. Discounts cannot be combined. Offer valid at all Zen Leaf Pennsylvania dispensaries,",
+      "2 for 42% Off Verano, Savvy, (the) Essence & On The Rocks Carts. While supplies last. Discounts cannot be combined. Offer valid at all Zen Leaf Pennsylvania dispensaries,",
+      "2 for 42% Off All Verano, Savvy & (the) Essence Vapes. Excludes Hyphen Live Rosin AIO. While supplies last. Discounts cannot be combined. Offer valid at all Zen Leaf Pennsylvania dispensaries,"
+    ],
+    "source_store": "Zen Leaf - Cranberry",
+    "parsed_rules": [
+      {
+        "type": "standard_percent",
+        "discount_percent": 0.3,
+        "required_quantity": 1,
+        "scope": "storewide",
+        "brands": []
+      },
+      {
+        "type": "bundle",
+        "required_quantity": 4,
+        "bundle_price": 99.0,
+        "scope": "brand",
+        "brands": [
+          "Savvy"
+        ]
+      },
+      {
+        "type": "standard_percent",
+        "discount_percent": 0.3,
+        "required_quantity": 1,
+        "scope": "brand",
+        "brands": [
+          "Verano",
+          "Savvy",
+          "Essence"
+        ]
+      },
+      {
+        "type": "bulk_percent",
+        "discount_percent": 0.42,
+        "required_quantity": 2,
+        "scope": "brand",
+        "brands": [
+          "Verano",
+          "Savvy",
+          "Essence",
+          "On The Rocks"
+        ]
+      },
+      {
+        "type": "bulk_percent",
+        "discount_percent": 0.42,
+        "required_quantity": 2,
+        "scope": "brand",
+        "brands": [
+          "Verano",
+          "Savvy",
+          "Essence"
+        ]
+      }
+    ]
+  },
+  {
+    "product_name": "Golden Pineapple",
+    "brand": "Strane",
+    "strain_type": "Unknown",
+    "category": "Vapes",
+    "weight": "1g",
+    "thc_percentage": 87.137,
+    "msrp_price": 40.5,
+    "sale_price": 40.5,
+    "source_store": "Zen Leaf - Cranberry",
+    "parsed_rules": []
+  },
+  {
+    "product_name": "Tiger's Milk",
+    "brand": "Strane",
+    "strain_type": "Unknown",
+    "category": "Vapes",
+    "weight": "1g",
+    "thc_percentage": 80.862,
+    "msrp_price": 40.5,
+    "sale_price": 40.5,
+    "source_store": "Zen Leaf - Cranberry",
+    "parsed_rules": []
+  },
+  {
+    "product_name": "Alien Beans",
+    "brand": "Double Bear",
+    "strain_type": "Unknown",
+    "category": "Vapes",
+    "weight": "1g",
+    "thc_percentage": 88.385,
+    "msrp_price": 50.5,
+    "sale_price": 50.5,
+    "source_store": "Zen Leaf - Cranberry",
+    "parsed_rules": []
+  },
+  {
+    "product_name": "Chimera #3",
+    "brand": "Double Bear",
+    "strain_type": "Unknown",
+    "category": "Vapes",
+    "weight": "1g",
+    "thc_percentage": 86.128,
+    "msrp_price": 50.5,
+    "sale_price": 50.5,
+    "source_store": "Zen Leaf - Cranberry",
+    "parsed_rules": []
+  },
+  {
+    "product_name": "Cherry Diesel",
+    "brand": "Double Bear",
+    "strain_type": "Unknown",
+    "category": "Vapes",
+    "weight": "1g",
+    "thc_percentage": 85.408,
+    "msrp_price": 50.5,
+    "sale_price": 50.5,
+    "source_store": "Zen Leaf - Cranberry",
+    "parsed_rules": []
+  }
+]
